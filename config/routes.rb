@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'static/index'
+
   get 'user/index'
 
   devise_for :users
