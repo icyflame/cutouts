@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   get 'user/index'
 
   devise_for :users
-	resources :articles
+	resources :article
 
-	get 'users/' => 'users#index'
+	get 'users' => 'user#index'
 
 	root 'routing#index'
   # The priority is based upon order of creation: first created -> highest priority.
