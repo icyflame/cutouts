@@ -1,6 +1,5 @@
-%h1 User#index
-%p Find me in app/views/user/index.html.haml
-
-%p You can see all the articles below:
+%h1 #{current_user.email}
+= link_to("Logout", destroy_user_session_path, method: :delete)
+%h3 All the articles you have added:
 
 = @allArticles.inspect
