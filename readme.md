@@ -1,6 +1,6 @@
-# articles-read _WIP_
+# cutouts _WIP_ 
 
-> Sign up, and start adding the articles that you have read and want to remember!
+> Sign up, and start adding the articles that you have read and want to remember! Deployed [here](http://cutouts.herokuapp.com)
 
 ### What?
 
@@ -19,9 +19,11 @@ project!
 
 ### TODO (in descending order of priority)
 
-- [ ] Create a good homepage that has a few words about why this project at all
+- [x] Create a good homepage that has a few words about why this project at all
+- [ ] User must be able to login with both username as well as email
+	- Override devise? (Devise procedure [here](https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign-in-using-their-username-or-email-address) seems extremely long)
 - [ ] Fix the word limit on quote (50 words?)
-- [ ] Fix the sign-in and sign-up form UI
+- [x] Fix the sign-in and sign-up form UI
 - [ ] Fix the horrible UI to make it usable at the very least (copy medium, that interface is too good!)
 - [ ] A rating system for self, no sharing as yet
 - [ ] Probably friendship and the ability to follow other users
