@@ -49,3 +49,4 @@ gem 'cancan'
 gem 'jquery-ui-rails'
 gem 'haml-rails'
 gem "erb2haml", :group => :development
+gem 'redcarpet'
