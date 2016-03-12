@@ -1,5 +1,5 @@
 %h1 
-  #{current_user.email} #{link_to("Logout", destroy_user_session_path, method: :delete, style: "float: right;")}
+  @#{current_user.username} #{link_to("Logout", destroy_user_session_path, method: :delete, style: "float: right;")}
 
 %hr{:style => "border-color: grey;"}
 

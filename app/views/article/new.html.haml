@@ -1,4 +1,1 @@
-= form_tag article_index_path, :method => :post do
-  = text_field_tag "link", "", placeholder: "enter link to article here"
-  = text_field_tag "quote", "", placeholder: "enter quote of the article here"
-  = submit_tag
+= render :partial => "shared/article_entry_form"
