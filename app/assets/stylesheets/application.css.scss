@@ -28,3 +28,9 @@ textarea {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+blockquote.article-quote {
+	@extend .text-muted;
+	border-left: 10px solid #ccc;
+	border-color: grey;
+}
