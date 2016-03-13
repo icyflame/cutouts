@@ -1,7 +1,7 @@
 .center
   %h3 Add an article right away!
   = form_tag article_index_path, method: :post do
-    = text_field_tag "link", '', { :placeholder => "Link to the article" } 
-    = text_field_tag "author", '', { :placeholder => "Name of the author / authors" }
-    = text_area_tag "quote", '', { :placeholder => "A selected paragraph from the article" }
+    = text_field_tag "link", '', { :placeholder => "Link to the article", :required => "required" } 
+    = text_field_tag "author", '', { :placeholder => "Name of the author / authors", :required => "required" }
+    = text_area_tag "quote", '', { :placeholder => "A selected paragraph from the article", :required => "required" }
     %input{ :type => "submit", :value => "Add article" }
