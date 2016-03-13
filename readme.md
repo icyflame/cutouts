@@ -24,7 +24,8 @@ project!
 	- Override devise? (Devise procedure [here](https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign-in-using-their-username-or-email-address) seems extremely long)
 - [ ] Fix the word limit on quote (50 words?)
 - [x] Fix the sign-in and sign-up form UI
-- [ ] Fix the horrible UI to make it usable at the very least (copy medium, that interface is too good!)
+- [x] Fix the horrible UI to make it usable at the very least (copy medium, that interface is too good!)
+- [ ] Ability for users to export their articles into a Markdown file for local storage (A JSON file for import too?)
 - [ ] A rating system for self, no sharing as yet
 - [ ] Probably friendship and the ability to follow other users
 
