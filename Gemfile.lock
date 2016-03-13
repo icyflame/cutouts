@@ -189,6 +189,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   erb2haml
+  font-awesome-rails
   haml-rails
   jbuilder (~> 2.0)
   jquery-rails
