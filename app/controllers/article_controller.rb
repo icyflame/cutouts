@@ -19,4 +19,12 @@ class ArticleController < ApplicationController
 	end
 	def new
 	end
+
+	def destroy
+		if Article.find(params[:id]).delete
+			redirect_to root_path, notice: "That article was deleted!"
+		else
+			redirect_to root_path, alert: "That article could not be deleted! Try again later."
+		end
+	end
 end
