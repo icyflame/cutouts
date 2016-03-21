@@ -9,9 +9,10 @@
     = csrf_meta_tags
   %body
     %h1.text-center Cutouts
-    %h1 @#{current_user.username} #{link_to(fa_icon("gear"), edit_user_registration_path)} #{link_to("Logout", destroy_user_session_path, method: :delete, style: "float: right;")}
+    - if user_signed_in?
+      %h1 @#{current_user.username} #{link_to(fa_icon("gear"), edit_user_registration_path)} #{link_to("Logout", destroy_user_session_path, method: :delete, style: "float: right;")}
 
-    %hr{:style => "border-color: grey;"}
+      %hr{:style => "border-color: grey;"}
 
     - if notice
       %p.alert.alert-success= notice
