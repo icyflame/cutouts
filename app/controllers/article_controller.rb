@@ -9,6 +9,7 @@ class ArticleController < ApplicationController
 		temp = current_user.articles.create
 		temp.link = params[:link]
 		temp.quote = params[:quote]
+		temp.author = params[:author]
 
 		if temp.save!
 			redirect_to root_path
