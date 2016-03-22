@@ -7,7 +7,7 @@
 - Simple form with just two questions : Link and a Quote from the article that you want to remember
 - Both fields are compulsary, oft-times I forget what an article is about, a quote
 from the article would tell me why the article was good
-- Simple interface, as simple as it can get. Nothing fancy. Vanilla bootstrap.
+- As simple as it can get. Nothing fancy. Vanilla bootstrap. Vanilla font awesome.
 - WIP
 
 ### Why?
@@ -25,6 +25,8 @@ project!
 - [ ] Fix the word limit on quote (50 words?)
 - [x] Fix the sign-in and sign-up form UI
 - [x] Fix the horrible UI to make it usable at the very least (copy medium, that interface is too good!)
+- [ ] A system to tag articles (single words)
+- [ ] A system to search for articles (single search bar, user search, tag search, author search, quote search)
 - [ ] Ability for users to export their articles into a Markdown file for local storage (A JSON file for import too?)
 - [ ] A rating system for self, no sharing as yet
 - [ ] Probably friendship and the ability to follow other users
