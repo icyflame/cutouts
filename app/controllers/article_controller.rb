@@ -33,11 +33,9 @@ class ArticleController < ApplicationController
 	end
 
 	def update
-		t = Article.find(params[:id])
-		t.link = params[:link]
-		t.author = params[:author]
-		t.quote = params[:quote]
-		if t.save!
+		temp = Article.find(params[:id])
+		params.keys.each { |key| temp[key] = params[key] if Article.column_names.include?(key) }
+		if temp.save!
 			redirect_to root_path, notice: "Article updated!"
 		else
 			redirect_to root_path, alert: "Couldn't update that article, try again later."
