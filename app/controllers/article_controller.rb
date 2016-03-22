@@ -27,4 +27,21 @@ class ArticleController < ApplicationController
 			redirect_to root_path, alert: "That article could not be deleted! Try again later."
 		end
 	end
+
+	def edit
+		@thisOne = Article.find(params[:id])
+	end
+
+	def update
+		t = Article.find(params[:id])
+		t.link = params[:link]
+		t.author = params[:author]
+		t.quote = params[:quote]
+		if t.save!
+			redirect_to root_path, notice: "Article updated!"
+		else
+			redirect_to root_path, alert: "Couldn't update that article, try again later."
+		end
+
+	end
 end

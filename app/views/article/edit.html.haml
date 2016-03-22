@@ -1,0 +1,8 @@
+.col-md-3
+.center.col-md-6
+  = form_tag(article_path(@thisOne), method: :patch) do
+    = text_field_tag("link", @thisOne.link)
+    = text_field_tag("author", @thisOne.author)
+    = text_area_tag("quote", @thisOne.quote)
+    = submit_tag "Update article"
+    
