@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'list_articles/index'
+
   get 'static/index'
 
   get 'user/index'
