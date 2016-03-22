@@ -6,11 +6,11 @@ class ArticleController < ApplicationController
 			redirect_to root_path, alert: "You have to be signed in to use this feature!"
 			return
 		end
-		temp = current_user.articles.create
-		temp.link = params[:link]
-		temp.quote = params[:quote]
-		temp.author = params[:author]
 
+		temp = current_user.articles.create
+
+		params.keys.each { |key| temp[key] = params[key] if Article.column_names.include?(key) }
+		
 		if temp.save!
 			redirect_to root_path
 		else
