@@ -1,4 +1,3 @@
-%h1 ListArticles#index
-%p Find me in app/views/list_articles/index.html.haml
-
 - # TODO: Figure out layout (boxes like Pocket?) ; Should look good in responsive as well
+- @allArticles.each do |article|
+  = render 'shared/article_single', :object => article
