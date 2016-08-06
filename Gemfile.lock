@@ -95,6 +95,8 @@ GEM
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
     pg (0.17.1)
+    rabl (0.13.0)
+      activesupport (>= 2.3.14)
     rack (1.5.5)
     rack-pjax (0.8.0)
       nokogiri (~> 1.5)
@@ -195,6 +197,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   pg
+  rabl
   rails (= 4.1.6)
   rails_12factor
   rails_admin
