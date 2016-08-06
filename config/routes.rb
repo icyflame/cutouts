@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+
+	scope '/api' do
+		scope '/v1' do
+			scope '/users' do
+				scope '/auth' do
+					get '/' => 'user#index'
+				end
+			end
+		end
+	end
+
+
   get 'list_articles/index'
 
   get 'static/index'
