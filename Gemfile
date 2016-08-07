@@ -52,3 +52,4 @@ gem "erb2haml", :group => :development
 gem 'redcarpet'
 gem "font-awesome-rails"
 gem "rabl"
+gem "aescrypt"
