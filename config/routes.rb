@@ -4,10 +4,13 @@ Rails.application.routes.draw do
 
 	scope '/api', constraints: { format: 'json' } do
 		scope '/v1' do
+			scope '/articles' do
+				post '/' => 'api_helpers#article_create'
+			end
 			scope '/users' do
 				post '/' => 'api_helpers#user_create'
 				scope '/auth' do
-					get '/' => 'user#index'
+					post '/' => 'api_helpers#user_signin'
 				end
 			end
 		end

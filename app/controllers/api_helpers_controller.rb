@@ -1,6 +1,9 @@
 class ApiHelpersController < ApplicationController
+	skip_before_action :verify_authenticity_token
 
-	skip_before_filter :verify_authenticity_token
+	# Creating a user
+	# Parameters must include
+	# user => [email, username, password, password_confirmation]
 	def user_create
 		respond_to do |format|
 			new_user = User.new params.require(:user).permit(:username, :email, :password, :password_confirmation)
@@ -14,6 +17,66 @@ class ApiHelpersController < ApplicationController
 				format.json { render json: new_user, status: :created }
 			else
 				format.json { render json: { "error" => "Error while creation!"}, status: 500 }
+			end
+		end
+	end
+
+	# Signing in a user
+	# params must include
+	# auth_data (== email || == username), auth_password ( == user.password)
+	def user_signin
+		respond_to do |format|
+			# figure out if a user exists
+			# Login with Username and Email both are supported
+			if User.where(:email => params[:auth_data]).count > 0
+				this_user = User.where(:email => params[:auth_data]).first
+			elsif User.where(:username => params[:auth_data]).count > 0
+				this_user = User.where(:username => params[:auth_data]).first
+			else
+				format.json { render json: { "error" => "User not found!" }, status: 400 }
+			end
+			if this_user != nil
+				if this_user.valid_password?(params[:auth_password])
+					# create the session for the user
+					this_session = Session.new
+					this_session.user_id = this_user.id
+					this_session.sid = OpenSSL::Digest::SHA256.new((Time.now.to_i + Random.new(Time.now.to_i).rand(1e3)).to_s).hexdigest
+					if this_session.save!
+						format.json { render json: { "msg" => "Successfully logged in!", session: this_session }, status: 200 }
+					else
+						format.json { render json: { "error" => "Server error, while creating a session!" }, status: 500 }
+					end
+				else
+					# bad password
+					format.json { render json: { "error" => "Bad password!" }, status: 401 }
+				end
+			end
+		end
+	end
+
+	# Creating an article from the parameters
+	# params must include
+	# sid, link (URL to the article), authors, quote
+	def article_create
+		respond_to do |format|
+			if not params.keys.include? "sid"
+				format.json { render json: { "error" => "You must provide a session ID!" }, status: 401 }
+			else
+				# get active session IDs and see if this one exists
+				this_session = Session.where("created_at > ?", 10.minutes.ago).where(:sid => params[:sid])
+				if this_session.count > 0
+					new_article = User.find(this_session.first.user_id).articles.new
+					new_article.link = params[:link]
+					new_article.quote = params[:quote]
+					new_article.author = params[:authors]
+					if new_article.save!
+						format.json {render json: { "msg" => "Article created!", article: new_article }, status: 201 }
+					else
+						format.json { render json: { "error" => "Server error! Try again in some time." }, status: 500 }
+					end
+				else
+					format.json { render json: { "error" => "Session timed out!" }, status: 401 }
+				end
 			end
 		end
 	end
