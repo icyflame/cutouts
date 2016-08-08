@@ -14,7 +14,7 @@ class ApiHelpersController < ApplicationController
 			elsif new_user.password != new_user.password_confirmation
 				format.json { render json: { "error" => "Passwords don't match! Check, and try again." }, status: 400 }
 			elsif new_user.save
-				format.json { render json: new_user, status: :created }
+				format.json { render json: { "res" => new_user }, status: :created }
 			else
 				format.json { render json: { "error" => "Error while creation!"}, status: 500 }
 			end
@@ -42,7 +42,7 @@ class ApiHelpersController < ApplicationController
 					this_session.user_id = this_user.id
 					this_session.sid = OpenSSL::Digest::SHA256.new((Time.now.to_i + Random.new(Time.now.to_i).rand(1e3)).to_s).hexdigest
 					if this_session.save!
-						format.json { render json: { "msg" => "Successfully logged in!", session: this_session }, status: 200 }
+						format.json { render json: { "msg" => "Successfully logged in!", "res" => this_session }, status: 200 }
 					else
 						format.json { render json: { "error" => "Server error, while creating a session!" }, status: 500 }
 					end
@@ -58,19 +58,19 @@ class ApiHelpersController < ApplicationController
 	# params must include
 	# sid, link (URL to the article), authors, quote
 	def article_create
+		puts "Paramas doesn't have SID: #{params_doesnt_have_sid params}"
 		respond_to do |format|
-			if not params.keys.include? "sid"
+			if params_doesnt_have_sid params
 				format.json { render json: { "error" => "You must provide a session ID!" }, status: 401 }
 			else
-				# get active session IDs and see if this one exists
-				this_session = Session.where("created_at > ?", 10.minutes.ago).where(:sid => params[:sid])
-				if this_session.count > 0
-					new_article = User.find(this_session.first.user_id).articles.new
+				user_id = get_user_id params[:sid]
+				if user_id
+					new_article = User.find(user_id).articles.new
 					new_article.link = params[:link]
 					new_article.quote = params[:quote]
 					new_article.author = params[:authors]
 					if new_article.save!
-						format.json {render json: { "msg" => "Article created!", article: new_article }, status: 201 }
+						format.json {render json: { "msg" => "Article created!", "res" => new_article }, status: 201 }
 					else
 						format.json { render json: { "error" => "Server error! Try again in some time." }, status: 500 }
 					end
@@ -79,5 +79,38 @@ class ApiHelpersController < ApplicationController
 				end
 			end
 		end
+	end
+
+	# List all the articles for the signed in user
+	# Params must include
+	# sid
+	def articles_list
+		respond_to do |format|
+			if params_doesnt_have_sid params
+				format.json { render json: { "error" => "You must provide a session ID!" }, status: 401 }
+			else
+				user_id = get_user_id params[:sid]
+				if user_id
+					format.json { render json: { "res" => User.find(user_id).articles }, status: 200 }
+				else
+					format.json { render json: { "error" => "Session timed out!" }, status: 401 }
+				end
+			end
+		end
+	end
+
+	private
+	def get_user_id(sid)
+		this_session = Session.where("created_at > ?", 10.minutes.ago).where(:sid => sid)
+		if this_session.count > 0
+			this_session.first.user_id
+		else
+			nil
+		end
+	end
+
+	private
+	def params_doesnt_have_sid(params)
+		not params.keys.include? "sid"
 	end
 end

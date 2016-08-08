@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 		scope '/v1' do
 			scope '/articles' do
 				post '/' => 'api_helpers#article_create'
+				get '/' => 'api_helpers#articles_list'
 			end
 			scope '/users' do
 				post '/' => 'api_helpers#user_create'
