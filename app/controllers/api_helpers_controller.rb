@@ -25,6 +25,11 @@ class ApiHelpersController < ApplicationController
 	# params must include
 	# auth_data (== email || == username), auth_password ( == user.password)
 	def user_signin
+		if not params.keys.include? "auth_data" or not params.keys.include? "auth_password"
+			respond_to do |format1|
+				format1.json { render json: { "msg" => "Invalid parameters! Fill in Username / Email and Password." }, status: 400 }
+			end
+		end
 		respond_to do |format|
 			# figure out if a user exists
 			# Login with Username and Email both are supported

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get 'api_helpers/password_compare'
 
-	scope '/api', constraints: { format: 'json' } do
+	scope '/api' do
 		scope '/v1' do
 			scope '/articles' do
 				post '/' => 'api_helpers#article_create'
