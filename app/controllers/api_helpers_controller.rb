@@ -47,7 +47,7 @@ class ApiHelpersController < ApplicationController
 					this_session.user_id = this_user.id
 					this_session.sid = OpenSSL::Digest::SHA256.new((Time.now.to_i + Random.new(Time.now.to_i).rand(1e3)).to_s).hexdigest
 					if this_session.save!
-						format.json { render json: { "msg" => "Successfully logged in!", "res" => this_session }, status: 200 }
+						format.json { render json: { "msg" => "Successfully logged in!", "res" => { "session" => this_session, "user" => this_user } }, status: 200 }
 					else
 						format.json { render json: { "error" => "Server error, while creating a session!" }, status: 500 }
 					end
