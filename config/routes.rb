@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get 'static/index'
 
   get 'user/index'
+  post 'user/export_articles', defaults: { format: 'json' }
 
   devise_for :users
 	resources :article
