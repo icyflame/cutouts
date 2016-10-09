@@ -5,7 +5,7 @@
 
 %h4 Download human-readable Markdown file #{link_to(fa_icon("cloud-download", text: ".md", class: "fa-2x"), root_path, method: :post)} 
 %h4 Download human-readable HTML file #{link_to(fa_icon("cloud-download", text: ".html", class: "fa-2x"), root_path, method: :post)} 
-%h4 Download machine-readable JSON file #{link_to(fa_icon("cloud-download", text: ".json", class: "fa-2x"), root_path, method: :post)} 
+%h4 Download machine-readable JSON file #{link_to(fa_icon("cloud-download", text: ".json", class: "fa-2x"), user_export_articles_path, format: 'json', method: 'post')} 
 
 - # TODO: put in the right path here for all the export options
 
