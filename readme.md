@@ -31,7 +31,7 @@ project!
 - [ ] A rating system for self, no sharing as yet
 - [ ] Probably friendship and the ability to follow other users
 
-[![forthebadge](http://forthebadge.com/images/badges/built-with-ruby.svg)](http://forthebadge.com)
+[![forthebadge](http://forthebadge.com/images/badges/made-with-ruby.svg)](http://forthebadge.com)
 
 Code inside this repo is licensed under MIT.
 
