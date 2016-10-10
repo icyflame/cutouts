@@ -1,0 +1,54 @@
+%html
+  %head
+    %title
+      #{current_user.username}'s Cutouts - #{Date.today}
+    :css
+      body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.428571429;
+        color: #333333;
+        margin: 40px;
+      }
+      p, h1, h2 {
+        margin: 0;
+      }
+      hr {
+        padding: 0 0 20px 0;
+        border: none;
+        border-top: medium double #333;
+        color: #333;
+        text-align: center;
+      }
+      a {
+        font-size: 19px;
+        color: #337ab7;
+        text-decoration: none;
+      }
+      article {
+        margin-bottom: 30px;
+      }
+      .article-quote {
+        border-left: 10px solid gray;
+        color: #777777;
+        padding: 10px 20px;
+        font-size: 17.5px;
+        margin-left: 0;
+        margin-top: 4px;
+      }
+
+  %body
+    %h1
+      #{current_user.username}'s Cutouts
+    %p
+      exported #{number_with_delimiter(@articles.count)} cutouts on #{Date.today}
+    %hr 
+    - @articles.each do |article|
+      %article
+        %h2
+          %a{href: article.link}
+            = article.link
+        %p
+          written by #{article.author}
+        %blockquote.article-quote
+          = article.quote
