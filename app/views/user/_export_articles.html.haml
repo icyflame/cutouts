@@ -46,7 +46,7 @@
     - @articles.each do |article|
       %article
         %h2
-          %a{href: article.link}
+          %a{href: article.link, target: "_blank"}
             = article.link
         %p
           written by #{article.author}
