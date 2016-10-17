@@ -2,13 +2,14 @@ class ArticleController < ApplicationController
 	before_filter :authenticate_user!
 
 	def index
+		@searchArticles = current_user.articles.search params[:input]
 	end
 
 	def create
 		temp = current_user.articles.create
 
 		params.keys.each { |key| temp[key] = params[key] if Article.column_names.include?(key) }
-		
+
 		if temp.save!
 			redirect_to root_path
 		else

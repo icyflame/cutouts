@@ -7,4 +7,8 @@ class Article < ActiveRecord::Base
 	def split_tags
 		self.tags = self.tags.split(',').uniq
 	end
+
+	def self.search input
+		return where("quote like '%#{input}%' or author like '%#{input}%' or link like '%#{input}%'")
+	end
 end
