@@ -2,13 +2,18 @@ class Article < ActiveRecord::Base
 	belongs_to :user
 	validates :link, :quote, presence: true
 
+	# This function has become long and complicated because of 
+	# a complex migration from the ActiveRecord serialized version of
+	# arrays (stored as YAML) back to a normal comma-separated string
 	def tags_array
 		if self.tags.kind_of?(String)
 			if self.tags.match(/\-\-\-\s\[\]/) or self.tags.match(/\-\-\-\s\[/)
 				require 'yaml'
 				puts "DEBUG: Found stray YAML!"
 				puts "DEBUG: #{YAML.load(self.tags)}"
-				self.tags = YAML.load(self.tags)
+				if YAML.load(self.tags)
+					self.tags = YAML.load(self.tags)
+				end
 			end
 		end
 		if self.tags.kind_of? Hash
