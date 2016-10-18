@@ -25,9 +25,9 @@ project!
 - [ ] Fix the word limit on quote (50 words?)
 - [x] Fix the sign-in and sign-up form UI
 - [x] Fix the horrible UI to make it usable at the very least (copy medium, that interface is too good!)
-- [ ] A system to tag articles (single words)
-- [ ] A system to search for articles (single search bar, user search, tag search, author search, quote search)
-- [ ] Ability for users to export their articles into a Markdown file for local storage (A JSON file for import too?)
+- [x] A system to tag articles (single words)
+- [x] A system to search for articles (single search bar, user search, tag search, author search, quote search)
+- [x] Ability for users to export their articles into a Markdown file for local storage (A JSON file for import too?)
 - [ ] A rating system for self, no sharing as yet
 - [ ] Probably friendship and the ability to follow other users
 
