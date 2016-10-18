@@ -11,6 +11,9 @@ class Article < ActiveRecord::Base
 				self.tags = YAML.load(self.tags)
 			end
 		end
+		if self.tags.kind_of? Hash
+			self.tags = self.tags.values.join(",")
+		end
 		if self.tags.kind_of? Array
 			self.tags = self.tags.join(",")
 		end
