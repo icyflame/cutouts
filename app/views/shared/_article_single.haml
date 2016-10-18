@@ -1,5 +1,10 @@
 %a{:href => object.link, :target => "_blank", :style => "font-size: 19px"} #{URI(object.link).host} #{fa_icon("external-link")}
-%p 
+%p
   written by #{object.author}
+  <br>
+  - object.tags.each do |tag|
+    %u>
+      %b>= tag
+    ,&nbsp;
   %span.pull-right #{link_to(fa_icon("pencil", class: "fa-2x"), edit_article_path(object))}  #{link_to(fa_icon("trash", class: "fa-2x"), article_path(object), method: :delete, data: { confirm: "Are you sure you want to delete that article?" } )}
 %blockquote.article-quote #{object.quote}
