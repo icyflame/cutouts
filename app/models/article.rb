@@ -5,7 +5,8 @@ class Article < ActiveRecord::Base
 	before_save :split_tags
 
 	def split_tags
-		self.tags = self.tags.split(',').uniq
+		# http://stackoverflow.com/a/17641383/2080089
+		self.tags = self.tags.split(',').uniq.map(&:strip)
 	end
 
 	def self.search input
