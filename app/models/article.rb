@@ -31,6 +31,6 @@ class Article < ActiveRecord::Base
 	end
 
 	def self.search input
-		return where("quote like '%#{input}%' or author like '%#{input}%' or link like '%#{input}%'")
+		return where("quote like '%#{input}%' or author like '%#{input}%' or link like '%#{input}%' or tags like '%#{input}'")
 	end
 end
