@@ -1,10 +1,19 @@
 class Article < ActiveRecord::Base
-	serialize :tags, Array
 	belongs_to :user
 	validates :link, :quote, presence: true
-	before_save :split_tags
 
-	def split_tags
+	def tags_array
+		if self.tags.kind_of?(String)
+			if self.tags.scan(/\-\-\-\s\[\]/) or self.tags.scan(/\-\-\-\s\[/)
+				require 'yaml'
+				puts "DEBUG: Found stray YAML!"
+				puts "DEBUG: #{YAML.load(self.tags)}"
+				self.tags = YAML.load(self.tags)
+			end
+		end
+		if self.tags.kind_of? Array
+			self.tags = self.tags.join(",")
+		end
 		# http://stackoverflow.com/a/17641383/2080089
 		self.tags = self.tags.split(',').uniq.map(&:strip)
 	end

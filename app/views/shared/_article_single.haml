@@ -2,7 +2,7 @@
 %p
   written by #{object.author}
   <br>
-  - object.tags.each do |tag|
+  - object.tags_array.each do |tag|
     %u>
       %b>= tag
     ,&nbsp;
