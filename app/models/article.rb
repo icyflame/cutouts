@@ -4,7 +4,7 @@ class Article < ActiveRecord::Base
 
 	def tags_array
 		if self.tags.kind_of?(String)
-			if self.tags.scan(/\-\-\-\s\[\]/) or self.tags.scan(/\-\-\-\s\[/)
+			if self.tags.match(/\-\-\-\s\[\]/) or self.tags.match(/\-\-\-\s\[/)
 				require 'yaml'
 				puts "DEBUG: Found stray YAML!"
 				puts "DEBUG: #{YAML.load(self.tags)}"
@@ -17,11 +17,12 @@ class Article < ActiveRecord::Base
 		if self.tags.kind_of? Array
 			self.tags = self.tags.join(",")
 		end
-		if self.tags == "{}" or self.tags == "[]" or self.tags == "--- []\n"
+		if self.tags == "{}" or self.tags == "[]" or self.tags == "--- []\n" or self.tags == {} or self.tags == false or self.tags == "false"
 			self.tags = ""
 		end
+		self.save!
 		# http://stackoverflow.com/a/17641383/2080089
-		self.tags = self.tags.split(',').uniq.map(&:strip)
+		return self.tags.split(',').uniq.map(&:strip)
 	end
 
 	def self.search input
