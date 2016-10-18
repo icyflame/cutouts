@@ -17,6 +17,9 @@ class Article < ActiveRecord::Base
 		if self.tags.kind_of? Array
 			self.tags = self.tags.join(",")
 		end
+		if self.tags == "{}" or self.tags == "[]" or self.tags == "--- []\n"
+			self.tags = ""
+		end
 		# http://stackoverflow.com/a/17641383/2080089
 		self.tags = self.tags.split(',').uniq.map(&:strip)
 	end
