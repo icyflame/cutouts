@@ -2,7 +2,7 @@ class Article < ActiveRecord::Base
 	belongs_to :user
 	validates :link, :quote, presence: true
 
-	# This function has become long and complicated because of 
+	# This function has become long and complicated because of
 	# a complex migration from the ActiveRecord serialized version of
 	# arrays (stored as YAML) back to a normal comma-separated string
 	def tags_array
@@ -31,6 +31,10 @@ class Article < ActiveRecord::Base
 	end
 
 	def self.search input
-		return where("quote like '%#{input}%' or author like '%#{input}%' or link like '%#{input}%' or tags like '%#{input}'")
+		return where("quote like :search_string
+			OR author like :search_string
+			OR link like :search_string
+			OR tags like :search_string",
+			search_string: "%#{input}%")
 	end
 end
