@@ -36,4 +36,8 @@ class Article < ActiveRecord::Base
 								 or LOWER(link) like LOWER('%#{input}%') 
 								 or LOWER(tags) like LOWER('%#{input}')")
 	end
+
+	def self.searchForTag input
+		return where("LOWER(tags) like LOWER('%#{input}%')")
+	end
 end

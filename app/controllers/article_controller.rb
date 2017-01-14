@@ -2,7 +2,13 @@ class ArticleController < ApplicationController
 	before_filter :authenticate_user!
 
 	def index
-		@searchArticles = current_user.articles.search params[:input]
+		if params[:input].match(/^tag:/i)
+			requiredTag = params[:input][4...params[:input].size]
+			requiredTag = URI::decode(requiredTag)
+			@searchArticles = current_user.articles.searchForTag requiredTag
+		else
+			@searchArticles = current_user.articles.search params[:input]
+		end
 	end
 
 	def create
