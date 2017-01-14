@@ -31,6 +31,9 @@ class Article < ActiveRecord::Base
 	end
 
 	def self.search input
-		return where("quote like '%#{input}%' or author like '%#{input}%' or link like '%#{input}%' or tags like '%#{input}'")
+		return where("LOWER(quote) like LOWER('%#{input}%') 
+								 or LOWER(author) like LOWER('%#{input}%') 
+								 or LOWER(link) like LOWER('%#{input}%') 
+								 or LOWER(tags) like LOWER('%#{input}')")
 	end
 end
