@@ -3,6 +3,9 @@ class UserController < ApplicationController
 
   def index
     @allArticles = current_user.articles.last(10).reverse
+    @prefill = { }
+    @prefill['link'] = params['link']
+    @prefill['quote'] = params['quote']
   end
 
   def export_articles
