@@ -6,6 +6,8 @@ class UserController < ApplicationController
     @prefill = { }
     @prefill['link'] = params['link']
     @prefill['quote'] = params['quote']
+
+    p @prefill
   end
 
   def export_articles
