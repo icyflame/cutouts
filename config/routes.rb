@@ -19,6 +19,10 @@ Rails.application.routes.draw do
 		end
 	end
 
+  scope '/about/' do
+    get '/' => 'static#about'
+  end
+
 
   get 'list_articles/index'
 

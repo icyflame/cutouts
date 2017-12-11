@@ -4,4 +4,7 @@ class StaticController < ApplicationController
 			redirect_to "/users/"
 		end
   end
+
+  def about
+  end
 end
