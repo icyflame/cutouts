@@ -5,4 +5,5 @@
     = text_field_tag "author", '', { :placeholder => "Name of the author / authors", :required => "required" }
     = text_field_tag "tags", '', { :placeholder => "Comma-separated tags" }
     = text_area_tag "quote", prefill["quote"], { :placeholder => "A selected paragraph from the article", :required => "required" }
+    = text_field_tag "title", prefill["title"], { :placeholder => "Title of the article (optional)" }
     %input{ :type => "submit", :value => "Add article" }
