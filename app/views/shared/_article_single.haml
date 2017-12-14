@@ -1,6 +1,7 @@
-%a{:href => object.link, :target => "_blank", :style => "font-size: 19px"} #{URI(object.link).host} #{fa_icon("external-link")}
+%a{:href => object.link, :target => "_blank", :style => "font-size: 19px"}
+  #{object.title || URI(object.link).host} #{fa_icon("external-link")}
 %p
-  written by #{object.author}
+  written by #{object.author}#{object.title ? (" on " + URI(object.link).host) : ""}
   <br>
   - object.tags_array.each do |tag|
     %u>
