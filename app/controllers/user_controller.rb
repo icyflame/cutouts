@@ -20,7 +20,7 @@ class UserController < ApplicationController
       end
 
       format.json do
-        articles = JSON.pretty_generate(@articles.as_json(only: [:link, :quote, :author]))
+        articles = JSON.pretty_generate(@articles.as_json(only: [:link, :quote, :author, :tags, :title]))
         send_data(articles, type: 'application/json', filename: "cutout-articles-#{Date.today}.json", disposition: 'attachment')
       end
     end

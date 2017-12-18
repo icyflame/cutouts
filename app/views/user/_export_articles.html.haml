@@ -42,12 +42,12 @@
       #{current_user.username}'s Cutouts
     %p
       exported #{number_with_delimiter(@articles.count)} cutouts on #{Date.today}
-    %hr 
+    %hr
     - @articles.each do |article|
       %article
         %h2
           %a{href: article.link, target: "_blank"}
-            = article.link
+            = article.title ? article.title : article.link
         %p
           written by #{article.author}
         %blockquote.article-quote
