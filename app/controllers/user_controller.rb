@@ -12,7 +12,11 @@ class UserController < ApplicationController
   end
 
   def export_articles
-    @articles = current_user.articles.all
+    @articles = current_user.articles.all.reverse
+
+    # export articles in reverse chronological order
+    @articles.sort_by { |a| a.created_at }
+    @articles.reverse!
 
     respond_to do |format|
       format.html do 
