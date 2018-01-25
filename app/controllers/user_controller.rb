@@ -2,7 +2,7 @@ class UserController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @allArticles = current_user.articles.last(10).reverse
+    @allArticles = current_user.articles.last(10)
     @prefill = { }
     @prefill['link'] = params['link']
     @prefill['quote'] = params['quote']
@@ -12,11 +12,7 @@ class UserController < ApplicationController
   end
 
   def export_articles
-    @articles = current_user.articles.all.reverse
-
-    # export articles in reverse chronological order
-    @articles.sort_by { |a| a.created_at }
-    @articles.reverse!
+    @articles = current_user.articles.all
 
     respond_to do |format|
       format.html do 

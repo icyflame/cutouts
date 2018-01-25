@@ -1,6 +1,7 @@
 class Article < ActiveRecord::Base
 	belongs_to :user
 	validates :link, :quote, presence: true
+    default_scope { order(created_at: :desc) }
 
 	# This function has become long and complicated because of 
 	# a complex migration from the ActiveRecord serialized version of
