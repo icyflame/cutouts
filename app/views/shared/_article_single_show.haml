@@ -1,5 +1,5 @@
 %div.article_single
-  %a{:href => object.link, :target => "_blank", :style => "font-size: 19px"}
+  %a{:href => object.link, :target => "_blank", :style => "font-size: 25px"}
     #{object.title || URI(object.link).host} #{fa_icon("external-link")}
   %p
     written by #{object.author}#{object.title ? (" on " + URI(object.link).host) : ""}

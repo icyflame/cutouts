@@ -62,6 +62,15 @@ class ArticleController < ApplicationController
 		end
 	end
 
+  def show
+    temp = Article.where(:id => params[:id])
+    if temp.count < 1
+      redirect_to root_path, alert: "That article doesn't exist!"
+      return
+    end
+    @article = temp[0]
+  end
+
   def share
     temp = Article.where(:id => params[:id])
     if temp.count >= 1
