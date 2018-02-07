@@ -1,9 +1,12 @@
 %div.text-center
-  %h2 File articles you love; for the 21st century
-  %h3 The internet is the newspaper, the link to the article is the cutout
-  %h3 A collection of all the articles that you have read, liked and would want to read again later.
-  %h3 Start adding articles!
+  %h3 Cutout parts of articles you love and store them forever
   %h3
-    = link_to("Sign up", new_user_registration_path)
+    Cutouts is free and will remain so forever! The code is open source on
+    %a{:href => "https://github.com/icyflame" } GitHub
+  %p
+    Email cutouts to friends and family. Share the permalink on social media.
+    Tag cutouts and search them using search strings and tags!
+  %h3 Start adding articles now!
   %h3
-    = link_to("Login", new_user_session_path)
+    #{link_to("Sign up", new_user_registration_path, { :class => "btn btn-lg btn-primary" })} &nbsp; #{link_to("Login", new_user_session_path, { :class => "btn btn-lg btn-primary" })}
+  = image_tag "frontpage.png", { :width => "1000px" }
