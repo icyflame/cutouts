@@ -10,5 +10,5 @@
       %u>
         %a{:href => article_index_path + "?input=tag:#{tag}"} #{tag}
       ,&nbsp;
-    %span.pull-right #{link_to(fa_icon("pencil", class: "fa-2x"), edit_article_path(object))}  #{link_to(fa_icon("trash", class: "fa-2x"), article_path(object), method: :delete, data: { confirm: "Are you sure you want to delete that article?" } )}
+    %span.pull-right #{link_to(fa_icon("share-alt", class: "fa-2x"), edit_article_path(object))} #{link_to(fa_icon("pencil", class: "fa-2x"), edit_article_path(object))}  #{link_to(fa_icon("trash", class: "fa-2x"), article_path(object), method: :delete, data: { confirm: "Are you sure you want to delete that article?" } )}
   %blockquote.article-quote #{object.quote}

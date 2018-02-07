@@ -61,4 +61,13 @@ class ArticleController < ApplicationController
 			redirect_to root_path, alert: "Couldn't update that article, try again later."
 		end
 	end
+
+  def share
+      temp = Article.where(:id => params[:id])
+      if temp.count >= 1
+        @thisOne = temp[0]
+      else
+        redirect_to root_path, alert: "That article doesn't exist!"
+      end
+  end
 end
