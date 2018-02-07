@@ -94,7 +94,7 @@ class ArticleController < ApplicationController
     valid_emails = emails.select { |email| is_valid_email(email) }
 
     # send emails to atmost 5 people at once
-    valid_emails = valid.emails.slice(0, 5)
+    valid_emails = valid_emails.slice(0, 5)
 
     ArticleSharer.share_article(article, valid_emails, current_user).deliver
 
