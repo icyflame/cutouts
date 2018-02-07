@@ -63,11 +63,16 @@ class ArticleController < ApplicationController
 	end
 
   def share
-      temp = Article.where(:id => params[:id])
-      if temp.count >= 1
-        @thisOne = temp[0]
-      else
-        redirect_to root_path, alert: "That article doesn't exist!"
-      end
+    temp = Article.where(:id => params[:id])
+    if temp.count >= 1
+      @thisOne = temp[0]
+    else
+      redirect_to root_path, alert: "That article doesn't exist!"
+    end
+  end
+
+  def send_share
+    @emails = params[:emails]
+    render plain: "#{@emails}"
   end
 end
