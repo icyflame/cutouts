@@ -1,5 +1,5 @@
 class ArticleController < ApplicationController
-	before_filter :authenticate_user!
+	before_filter :authenticate_user!, :except => [:show]
 
 	def index
 		if params[:input].match(/^tag:/i)
@@ -61,4 +61,39 @@ class ArticleController < ApplicationController
 			redirect_to root_path, alert: "Couldn't update that article, try again later."
 		end
 	end
+
+  def show
+    temp = Article.where(:id => params[:id])
+    if temp.count < 1
+      redirect_to root_path, alert: "That article doesn't exist!"
+      return
+    end
+    @article = temp[0]
+  end
+
+  def share
+    temp = Article.where(:id => params[:id])
+    if temp.count >= 1
+      @thisOne = temp[0]
+    else
+      redirect_to root_path, alert: "That article doesn't exist!"
+    end
+  end
+
+  def send_share
+    temp = Article.where(:id => params[:id])
+    if temp.count < 1
+      redirect_to root_path, alert: "That article doesn't exist!"
+      return
+    end
+    article = temp[0]
+
+    emails = params[:emails]
+    emails = emails.split(",")
+    emails = emails.map { |email| email.strip }
+    valid_emails = emails.select { |email| is_valid_email(email) }
+    ArticleSharer.share_article(article, valid_emails, current_user).deliver
+
+    redirect_to root_path, notice: "Article shared with #{valid_emails.join ", "}"
+  end
 end

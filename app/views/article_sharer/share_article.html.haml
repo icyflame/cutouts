@@ -1,0 +1,9 @@
+%head
+  %meta{'http-equiv' => 'Content-Type', 'content' => "text/html; charset=utf8"}/
+
+%h1 Cutouts
+%br/
+%br/
+%p= "#{@from_username} has shared a cutout from #{URI(@article.link).host} with you"
+%blockquote= @article.quote
+%p= "Written by #{@article.author}"
