@@ -92,6 +92,10 @@ class ArticleController < ApplicationController
     emails = emails.split(",")
     emails = emails.map { |email| email.strip }
     valid_emails = emails.select { |email| is_valid_email(email) }
+
+    # send emails to atmost 5 people at once
+    valid_emails = valid.emails.slice(0, 5)
+
     ArticleSharer.share_article(article, valid_emails, current_user).deliver
 
     redirect_to root_path, notice: "Article shared with #{valid_emails.join ", "}"
