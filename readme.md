@@ -1,4 +1,4 @@
-# cutouts _WIP_ 
+# cutouts
 
 > Sign up, and start adding the articles that you have read and want to remember! Deployed [here](http://cutouts.herokuapp.com)
 
@@ -16,6 +16,33 @@ The internet has a lot of good content, blog posts, articles, etc etc. I read a 
 of stuff, and then could not find them again when I wanted to. Pocket is good for saving
 for later, Delicious and Pinterest are overkill for something as simple. Hence, this 
 project!
+
+## Release Notes
+
+### v1.0 - 2018-02-07
+
+- Add, update, delete cutouts
+- Tag cutouts and then search the cutouts in a particular tag
+- List all the cutouts you have stored in the past
+- Export all your cutouts to UTF8 encoded HTML or JSON
+- Share the permalink for an article that has the title of the article, the
+    quote, the author and it's tags
+
+    ![img](./img/v1_1.png)
+
+- Email a Cutout to friends and family (maximum 5 at once)
+
+    ![img](./img/v1_2.png)
+
+- Add an alias while emailing so that recipients know the cutout is from you
+- Display tags as Bootstrap buttons
+
+    ![img](./img/v1_3.png)
+
+- A link to the archives of the page that has the Cutout
+- A companion 
+    [Firefox add-on](https://addons.mozilla.org/en-US/firefox/addon/cutouts-firefox-extension/)
+    to make it easier to Cutout articles from Firefox
 
 ### TODO (in descending order of priority)
 
