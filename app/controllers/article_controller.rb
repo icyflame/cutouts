@@ -72,7 +72,19 @@ class ArticleController < ApplicationController
   end
 
   def send_share
-    @emails = params[:emails]
-    render plain: "#{@emails}"
+    temp = Article.where(:id => params[:id])
+    if temp.count < 1
+      redirect_to root_path, alert: "That article doesn't exist!"
+      return
+    end
+    article = temp[0]
+
+    emails = params[:emails]
+    emails = emails.split(",")
+    emails = emails.map { |email| email.strip }
+    valid_emails = emails.select { |email| is_valid_email(email) }
+    ArticleSharer.share_article(article, valid_emails, current_user).deliver
+
+    redirect_to root_path, notice: "Article shared with #{valid_emails.join ", "}"
   end
 end
