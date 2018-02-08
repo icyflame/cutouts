@@ -1,6 +1,6 @@
 %div.article_single
   %a{:href => object.link, :target => "_blank", :style => "font-size: 19px"}
-    #{object.title || URI(object.link).host} #{fa_icon("external-link")}
+    #{(object.title && object.title.length > 0) ? object.title : URI(object.link).host} #{fa_icon("external-link")}
   %p
     written by #{object.author}#{object.title ? (" on " + URI(object.link).host) : ""}
     %a.pull-right{:href => "https://archive.is/#{object.link}", :target => "_blank", :style => "font-size: 19px"}
