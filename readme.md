@@ -1,6 +1,6 @@
 # cutouts
 
-> Sign up, and start adding the articles that you have read and want to remember! Deployed [here](http://cutouts.herokuapp.com)
+> Sign up, and start adding the articles that you have read and want to remember! Deployed [here](https://cutouts.siddharthkannan.in)
 
 ### What?
 
