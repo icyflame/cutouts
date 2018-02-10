@@ -1,9 +1,21 @@
 class UserController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [ :public_page ]
 
   def index
     @allArticles = current_user.articles.all.limit(10)
     @prefill = params
+  end
+
+  def public_page
+    user = User.where({ username: params[:username] }).first
+    p user
+    p user == nil
+    if user == nil
+      redirect_to root_path, alert: "Username #{params[:username]} doesn't exist! You can create an account with that username if you would like to!"
+      return
+    end
+
+    @allArticles = user.articles.all
   end
 
   def export_articles

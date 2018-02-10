@@ -12,5 +12,4 @@
     The last few articles you added to Cutouts:
     %span.pull-right #{link_to(fa_icon("list"), list_articles_index_path, title: "See all your articles")}
 
-  - @allArticles.each do |article|
-    = render "shared/article_single", :object => article
+  = render "shared/list_several_articles", articles: @allArticles, partial: "shared/article_single"

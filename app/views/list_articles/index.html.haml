@@ -1,3 +1,4 @@
 - # TODO: Figure out layout (boxes like Pocket?) ; Should look good in responsive as well
-- @allArticles.each do |article|
-  = render 'shared/article_single', :object => article
+.col-md-3
+.center.col-md-6
+  = render 'shared/list_several_articles', articles: @allArticles, partial: "shared/article_single"

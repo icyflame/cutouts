@@ -28,13 +28,13 @@ Rails.application.routes.draw do
 
   get 'static/index'
 
-  get 'user/index'
   get 'user/export_articles'
 
   devise_for :users
   resources :article
 
   get 'users' => 'user#index'
+  get ':username' => 'user#public_page'
 
   get 'articles' => 'article#index'
 
