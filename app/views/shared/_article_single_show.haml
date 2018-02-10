@@ -5,7 +5,4 @@
     written by #{object.author}
     %a.pull-right{:href => "https://archive.is/#{object.link}", :target => "_blank", :style => "font-size: 19px"}
       ARCHIVES
-  %p
-    - object.tags_array.each do |tag|
-      %a.btn.btn-primary{:href => "#{article_index_path}?input=tag:#{tag}"}= tag
   %blockquote.article-quote #{object.quote}
