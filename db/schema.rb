@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171214043342) do
+ActiveRecord::Schema.define(version: 20180210205553) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20171214043342) do
     t.integer  "user_id"
     t.string   "tags",       default: ""
     t.string   "title"
+    t.integer  "visibility", default: 0
   end
 
   add_index "articles", ["user_id"], name: "index_articles_on_user_id"
