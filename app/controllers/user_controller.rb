@@ -3,10 +3,7 @@ class UserController < ApplicationController
 
   def index
     @allArticles = current_user.articles.all.limit(10)
-    @prefill = { }
-    @prefill['link'] = params['link']
-    @prefill['quote'] = params['quote']
-    @prefill['title'] = params['title']
+    @prefill = params
   end
 
   def export_articles

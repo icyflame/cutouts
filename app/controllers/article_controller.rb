@@ -16,13 +16,30 @@ class ArticleController < ApplicationController
 
 		params.keys.each { |key| temp[key] = params[key] if Article.column_names.include?(key) }
 
+    if !temp.valid?
+      redirect_to({ action: "new", populated: true, link: temp.link, author: temp.author, tags: temp.tags, quote: temp.quote, title: temp.title })
+      return
+    end
+
 		if temp.save!
 			redirect_to root_path
 		else
 			render plain: "Could not save the article!"
 		end
 	end
+
 	def new
+    p params
+
+    @article = { }
+    @populated = params[:populated]
+
+    if params[:populated]
+      temp = current_user.articles.create
+      params.keys.each { |key| temp[key] = params[key] if Article.column_names.include?(key) }
+      @article = temp
+      @article.valid?
+    end
 	end
 
 	def destroy
