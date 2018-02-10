@@ -1,4 +1,5 @@
 class ArticleController < ApplicationController
+  include ArticleHelper
   before_filter :authenticate_user!, :except => [:show]
 
   def index
@@ -14,10 +15,10 @@ class ArticleController < ApplicationController
   def create
     temp = current_user.articles.create
 
-    params.keys.each { |key| temp[key] = params[key] if Article.column_names.include?(key) }
+    get_article_params(params).map { |k, v| temp[k.to_s] = v }
 
     if !temp.valid?
-      redirect_to({ action: "new", populated: true, link: temp.link, author: temp.author, tags: temp.tags, quote: temp.quote, title: temp.title })
+      redirect_to new_article_path(get_article_params(params))
       return
     end
 
@@ -30,12 +31,11 @@ class ArticleController < ApplicationController
 
   def new
     @article = { }
-    @populated = params[:populated]
+    @populated = (params.keys & allowed_params).count > 0
 
-    if params[:populated]
-      temp = current_user.articles.create
-      params.keys.each { |key| temp[key] = params[key] if Article.column_names.include?(key) }
-      @article = temp
+    if @populated
+      @article = current_user.articles.create
+      get_article_params(params).map { |k, v| @article[k.to_s] = v }
       @article.valid?
     end
   end

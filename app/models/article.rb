@@ -1,7 +1,7 @@
 class Article < ActiveRecord::Base
   belongs_to :user
   validates :link, :quote, :author, presence: true
-  validates :link, format: { with: URI::regexp, message: "Field must be a valid URL! Include http or https in the URL." }
+  validates :link, format: { with: URI::regexp, message: "field must be a valid URL: Include http or https in the URL." }
   default_scope { order(created_at: :desc) }
 
   # This function has become long and complicated because of 
