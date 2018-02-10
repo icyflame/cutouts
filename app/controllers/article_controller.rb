@@ -1,36 +1,34 @@
 class ArticleController < ApplicationController
-	before_filter :authenticate_user!, :except => [:show]
+  before_filter :authenticate_user!, :except => [:show]
 
-	def index
-		if params[:input].match(/^tag:/i)
-			requiredTag = params[:input][4...params[:input].size]
-			requiredTag = URI::decode(requiredTag)
-			@searchArticles = current_user.articles.searchForTag requiredTag
-		else
-			@searchArticles = current_user.articles.search params[:input]
-		end
-	end
+  def index
+    if params[:input].match(/^tag:/i)
+      requiredTag = params[:input][4...params[:input].size]
+      requiredTag = URI::decode(requiredTag)
+      @searchArticles = current_user.articles.searchForTag requiredTag
+    else
+      @searchArticles = current_user.articles.search params[:input]
+    end
+  end
 
-	def create
-		temp = current_user.articles.create
+  def create
+    temp = current_user.articles.create
 
-		params.keys.each { |key| temp[key] = params[key] if Article.column_names.include?(key) }
+    params.keys.each { |key| temp[key] = params[key] if Article.column_names.include?(key) }
 
     if !temp.valid?
       redirect_to({ action: "new", populated: true, link: temp.link, author: temp.author, tags: temp.tags, quote: temp.quote, title: temp.title })
       return
     end
 
-		if temp.save!
-			redirect_to root_path
-		else
-			render plain: "Could not save the article!"
-		end
-	end
+    if temp.save!
+      redirect_to root_path
+    else
+      render plain: "Could not save the article!"
+    end
+  end
 
-	def new
-    p params
-
+  def new
     @article = { }
     @populated = params[:populated]
 
@@ -40,44 +38,44 @@ class ArticleController < ApplicationController
       @article = temp
       @article.valid?
     end
-	end
+  end
 
-	def destroy
-		if Article.find(params[:id]).user_id != current_user.id
-			redirect_to root_path, alert: "That's not your article to edit!"
-			return
-		end
+  def destroy
+    if Article.find(params[:id]).user_id != current_user.id
+      redirect_to root_path, alert: "That's not your article to edit!"
+      return
+    end
 
-		if Article.find(params[:id]).delete
-			redirect_to root_path, notice: "That article was deleted!"
-		else
-			redirect_to root_path, alert: "That article could not be deleted! Try again later."
-		end
-	end
+    if Article.find(params[:id]).delete
+      redirect_to root_path, notice: "That article was deleted!"
+    else
+      redirect_to root_path, alert: "That article could not be deleted! Try again later."
+    end
+  end
 
-	def edit
-		if Article.find(params[:id]).user_id != current_user.id
-			redirect_to root_path, alert: "That's not your article to edit!"
-			return
-		end
+  def edit
+    if Article.find(params[:id]).user_id != current_user.id
+      redirect_to root_path, alert: "That's not your article to edit!"
+      return
+    end
 
-		@thisOne = Article.find(params[:id])
-	end
+    @thisOne = Article.find(params[:id])
+  end
 
-	def update
-		if Article.find(params[:id]).user_id != current_user.id
-			redirect_to root_path, alert: "That's not your article to edit!"
-			return
-		end
+  def update
+    if Article.find(params[:id]).user_id != current_user.id
+      redirect_to root_path, alert: "That's not your article to edit!"
+      return
+    end
 
-		temp = Article.find(params[:id])
-		params.keys.each { |key| temp[key] = params[key] if Article.column_names.include?(key) }
-		if temp.save!
-			redirect_to root_path, notice: "Article updated!"
-		else
-			redirect_to root_path, alert: "Couldn't update that article, try again later."
-		end
-	end
+    temp = Article.find(params[:id])
+    params.keys.each { |key| temp[key] = params[key] if Article.column_names.include?(key) }
+    if temp.save!
+      redirect_to root_path, notice: "Article updated!"
+    else
+      redirect_to root_path, alert: "Couldn't update that article, try again later."
+    end
+  end
 
   def show
     temp = Article.where(:id => params[:id])
