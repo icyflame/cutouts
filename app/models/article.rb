@@ -3,6 +3,7 @@ class Article < ActiveRecord::Base
   validates :link, :quote, :author, presence: true
   validates :link, format: { with: URI::regexp, message: "field must be a valid URL: Include http or https in the URL." }
   default_scope { order(created_at: :desc) }
+  enum visibility: [ :open, :unlisted, :closed ]
 
   # This function has become long and complicated because of 
   # a complex migration from the ActiveRecord serialized version of
