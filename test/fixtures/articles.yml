@@ -4,8 +4,10 @@ one:
   link: "http://test.example.com"
   quote: "this could be a quote"
   author: "daisy"
+  user: carson
 
 two:
   link: "http://example.com"
   quote: "a quote"
   author: "mrs hughes"
+  user: carson

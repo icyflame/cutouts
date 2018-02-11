@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+carson:
   email: "carson@downton.com"
   username: "carson"
 
-two:
+hughes:
   email: "hughes@downton.com"
   username: "hughes"
 
-three:
+patmore:
   email: "patmore@downton.com"
   username: "patmore"
