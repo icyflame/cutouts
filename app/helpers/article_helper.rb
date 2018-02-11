@@ -12,4 +12,8 @@ module ArticleHelper
   def show_allowed article
     !article.closed?
   end
+
+  def viz_int_val viz
+    Article.visibilities[viz]
+  end
 end
