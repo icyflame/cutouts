@@ -1,4 +1,5 @@
 - # TODO: Figure out layout (boxes like Pocket?) ; Should look good in responsive as well
-.col-md-3
-.center.col-md-6
-  = render 'shared/list_several_articles', articles: @allArticles, partial: "shared/article_single"
+.row
+  .col-md-3
+  .center.col-md-6
+    = render 'shared/list_several_articles', articles: @allArticles, partial: "shared/article_single"

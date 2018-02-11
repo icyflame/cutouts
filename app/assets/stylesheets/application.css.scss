@@ -15,8 +15,7 @@
  *= require_self
  *= require font-awesome
  */
-@import "bootstrap-sprockets";
-@import "bootstrap";
+@import 'bootstrap';
 html,
 body {
   margin-left: 20px;
@@ -31,7 +30,10 @@ textarea {
 }
 
 blockquote.article-quote {
-	@extend .text-muted;
-	border-left: 10px solid #ccc;
-	border-color: grey;
+  @extend .blockquote;
+  @extend .text-muted;
+  padding: .5rem 1rem;
+  border-left: .25rem solid #eceeef;
+	// border-left: 10px solid #ccc;
+	// border-color: grey;
 }

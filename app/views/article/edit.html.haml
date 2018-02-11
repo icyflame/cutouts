@@ -1,11 +1,11 @@
-.col-md-3
-.center.col-md-6
-  = form_tag(article_path(@thisOne), method: :patch) do
-    = text_field_tag("link", @thisOne.link)
-    = text_field_tag("author", @thisOne.author)
-    = text_field_tag("tags", @thisOne.tags)
-    = text_area_tag("quote", @thisOne.quote)
-    = text_field_tag("title", @thisOne.title)
-    = render 'article/visibility_chooser', viz: viz_int_val(@thisOne.visibility)
-    = submit_tag "Update article"
-
+.row
+  .col-md-3
+  .center.col-md-6
+    = form_tag(article_path(@thisOne), method: :patch) do
+      = text_field_tag("link", @thisOne.link)
+      = text_field_tag("author", @thisOne.author)
+      = text_field_tag("tags", @thisOne.tags)
+      = text_area_tag("quote", @thisOne.quote)
+      = text_field_tag("title", @thisOne.title)
+      = render 'article/visibility_chooser', viz: viz_int_val(@thisOne.visibility)
+      = submit_tag "Update article"

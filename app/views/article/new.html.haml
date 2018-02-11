@@ -1,10 +1,11 @@
-.col-md-3
-.center.col-md-6
-  - if @article != { } and @article.errors.any? and @populated
-    .errors
-      %h3 Errors
-      %p="#{pluralize(@article.errors.count, "error")} found in the article"
-      %ol
-        - for msg in @article.errors.full_messages
-          %li=msg
-  = render :partial => "shared/article_entry_form", locals: { prefill: @article }
+.row
+  .col-md-3
+  .center.col-md-6
+    - if @article != { } and @article.errors.any? and @populated
+      .errors
+        %h3 Errors
+        %p="#{pluralize(@article.errors.count, "error")} found in the article"
+        %ol
+          - for msg in @article.errors.full_messages
+            %li=msg
+    = render :partial => "shared/article_entry_form", locals: { prefill: @article }
