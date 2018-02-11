@@ -4,15 +4,15 @@
 - classes[selected] = "active"
 - checked[selected] = true
 .btn-group.btn-group-lg.btn-group-toggle{"data-toggle" => "buttons"}
-  %label.btn.btn-primary{ title: "Visible on your public Cutouts page", class: classes[0] }
+  %label.btn.btn-secondary{ title: "Visible on your public Cutouts page", class: classes[0] }
     %input{ type: "radio", name: "visibility", value: "0", checked: checked[0] }
       %span Public
       %span.align-middle= fa_icon("globe", class: "fa-2x")
-  %label.btn.btn-primary{ title: "Invisible on your public Cutouts page, but you can still share the link to the cutout", class: classes[1] }
+  %label.btn.btn-secondary{ title: "Invisible on your public Cutouts page, but you can still share the link to the cutout", class: classes[1] }
     %input{ type: "radio", name: "visibility", value: "1", checked: checked[1] }
       %span Unlisted
       %span= fa_icon("unlock", class: "fa-2x")
-  %label.btn.btn-primary{ title: "Visible only to you", class: classes[2] }
+  %label.btn.btn-secondary{ title: "Visible only to you", class: classes[2] }
     %input{ type: "radio", name: "visibility", value: "2", checked: checked[2] }
       %span Private
       %span= fa_icon("lock", class: "fa-2x")
