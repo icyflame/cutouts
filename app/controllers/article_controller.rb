@@ -59,7 +59,8 @@ class ArticleController < ApplicationController
       return
     end
 
-    @thisOne = Article.find(params[:id])
+    @article = Article.find(params[:id])
+    @article.valid?
   end
 
   def update
@@ -70,6 +71,10 @@ class ArticleController < ApplicationController
 
     temp = Article.find(params[:id])
     params.keys.each { |key| temp[key] = params[key] if Article.column_names.include?(key) }
+    if !temp.valid?
+      redirect_to edit_article_path(temp), alert: "OOPS! There were errors in that article: #{temp.errors.full_messages.join '; '}"
+      return
+    end
     if temp.save!
       redirect_to root_path, notice: "Article updated!"
     else
