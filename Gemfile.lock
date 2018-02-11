@@ -125,7 +125,7 @@ GEM
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
-    pg (1.0.0)
+    pg (0.21.0)
     popper_js (1.12.9)
     rabl (0.13.1)
       activesupport (>= 2.3.14)
@@ -244,7 +244,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails
-  pg
+  pg (~> 0.11)
   rabl
   rails
   rails_12factor

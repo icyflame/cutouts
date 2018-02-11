@@ -8,7 +8,7 @@ gem 'dotenv-rails', :groups => [:development, :test]
 gem 'rails'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', group: [:development, :test]
-gem 'pg'
+gem 'pg', '~> 0.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '> 4'
 # Use Uglifier as compressor for JavaScript assets
