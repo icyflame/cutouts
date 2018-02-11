@@ -16,4 +16,16 @@ module ArticleHelper
   def viz_int_val viz
     Article.visibilities[viz]
   end
+
+  def viz_icon viz
+    ind = viz
+    if viz.is_a? String
+      ind = viz_int_val viz
+    end
+
+    icons = [ "globe", "unlock", "lock" ]
+    tips = [ "publicly available", "available only if you share the link", "visible only to you" ]
+
+    fa_icon(icons[ind], class: "fa-2x", title: tips[ind])
+  end
 end

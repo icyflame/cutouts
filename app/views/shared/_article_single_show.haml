@@ -1,6 +1,7 @@
 %div.article_single
   %a{:href => object.link, :target => "_blank", :style => "font-size: 25px"}
     #{(object.title && object.title.length > 0) ? object.title : (object.link =~ URI::regexp ? URI(object.link).host : "#{object.link.slice(0, 10)}...")} #{fa_icon("external-link")}
+  %span &nbsp; &nbsp; #{viz_icon object.visibility}
   %p
     written by #{object.author}.
     %i{title: "#{object.created_at.to_s}"} added #{time_ago_in_words(object.created_at)} ago
