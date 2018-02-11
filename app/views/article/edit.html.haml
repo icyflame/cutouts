@@ -9,10 +9,6 @@
           - for msg in @article.errors.full_messages
             %li=msg
     = form_tag(article_path(@article), method: :patch) do
-      = text_field_tag("link", @article.link)
-      = text_field_tag("author", @article.author)
-      = text_field_tag("tags", @article.tags)
-      = text_area_tag("quote", @article.quote)
-      = text_field_tag("title", @article.title)
+      = render 'article/entry_form_basics', prefill: @article
       = render 'article/visibility_chooser', viz: viz_int_val(@article.visibility)
       = submit_tag "Update article"
