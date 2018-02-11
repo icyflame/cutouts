@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  link: MyString
-  quote: MyString
-  author: MyString
+  link: "http://test.example.com"
+  quote: "this could be a quote"
+  author: "daisy"
 
 two:
-  link: MyString
-  quote: MyString
-  author: MyString
+  link: "http://example.com"
+  quote: "a quote"
+  author: "mrs hughes"
