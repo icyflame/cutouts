@@ -8,4 +8,8 @@ module ArticleHelper
     required_keys = allowed_params
     inp.select { |k, v| required_keys.include? k.to_s }
   end
+
+  def show_allowed article
+    !article.closed?
+  end
 end

@@ -15,7 +15,7 @@ class UserController < ApplicationController
       return
     end
 
-    @allArticles = user.articles.all
+    @allArticles = user.articles.where ({ :visibility => Article.visibilities["open"] })
   end
 
   def export_articles

@@ -7,4 +7,5 @@
     = text_field_tag "tags", prefill["tags"], { :placeholder => "Comma-separated tags" }
     = text_area_tag "quote", prefill["quote"], { :placeholder => "A selected paragraph from the article", :required => "required" }
     = text_field_tag "title", prefill["title"], { :placeholder => "Title of the article (optional)" }
+    = render 'article/visibility_chooser', viz: prefill["visibility"] || 0
     %input{ :type => "submit", :value => "Add article" }

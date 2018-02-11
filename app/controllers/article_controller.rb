@@ -79,7 +79,7 @@ class ArticleController < ApplicationController
 
   def show
     temp = Article.where(:id => params[:id])
-    if temp.count < 1
+    if temp.count < 1 || !show_allowed(temp[0])
       redirect_to root_path, alert: "That article doesn't exist!"
       return
     end

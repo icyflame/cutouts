@@ -1,0 +1,16 @@
+- classes = [ "", "", "" ]
+- selected = viz || 0
+- classes[selected] = "active"
+.btn-group.btn-group-lg.btn-group-toggle{"data-toggle" => "buttons"}
+  %label.btn.btn-primary{ title: "Visible on your public Cutouts page", class: classes[0] }
+    %input{ type: "radio", name: "visibility", value: "0" }
+      %span Public
+      %span.align-middle= fa_icon("globe", class: "fa-2x")
+  %label.btn.btn-primary{ title: "Invisible on your public Cutouts page, but you can still share the link to the cutout", class: classes[1] }
+    %input{ type: "radio", name: "visibility", value: "1" }
+      %span Unlisted
+      %span= fa_icon("unlock", class: "fa-2x")
+  %label.btn.btn-primary{ title: "Visible only to you", class: classes[2] }
+    %input{ type: "radio", name: "visibility", value: "2" }
+      %span Private
+      %span= fa_icon("lock", class: "fa-2x")
