@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/stympy/faker.git
+  revision: 679fd508c9f41f41b6df62024d67bc2281953395
+  branch: master
+  specs:
+    faker (1.8.7)
+      i18n (>= 0.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -35,7 +43,6 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    aescrypt (1.0.0)
     arel (6.0.4)
     autoprefixer-rails (7.2.6)
       execjs
@@ -69,6 +76,8 @@ GEM
       html2haml
     erubis (2.7.0)
     execjs (2.7.0)
+    factory_bot (4.8.2)
+      activesupport (>= 3.0.0)
     ffi (1.9.21)
     font-awesome-rails (4.7.0.3)
       railties (>= 3.2, < 5.2)
@@ -232,13 +241,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aescrypt
   bootstrap (~> 4.0.0)
   cancan
   coffee-rails (~> 4.0.0)
   devise
   dotenv-rails
   erb2haml
+  factory_bot
+  faker!
   font-awesome-rails
   haml-rails
   jbuilder (~> 2.0)

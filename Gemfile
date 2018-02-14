@@ -2,7 +2,8 @@ source 'https://rubygems.org'
 ruby '2.3.1'
 
 gem 'dotenv-rails', :groups => [:development, :test]
-
+gem 'factory_bot', :groups => [:development, :test]
+gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master', group: [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
@@ -55,4 +56,3 @@ gem "erb2haml", :group => :development
 gem 'redcarpet'
 gem "font-awesome-rails"
 gem "rabl"
-gem "aescrypt"
