@@ -2,13 +2,15 @@
 
 > Sign up, and start adding the articles that you have read and want to remember! Deployed [here](https://cutouts.siddharthkannan.in)
 
+You can find the Firefox companion add-on [here](https://addons.mozilla.org/en-US/firefox/addon/cutouts-firefox-extension/)
+
 ### What?
 
-- Simple form with just two questions : Link and a Quote from the article that you want to remember
-- Both fields are compulsary, oft-times I forget what an article is about, a quote
-from the article would tell me why the article was good
+- Simple form with just two compulsary questions: Link and a Quote from the article that you want to remember
 - As simple as it can get. Nothing fancy. Vanilla bootstrap. Vanilla font awesome.
-- WIP
+- List public cutouts at profile page
+- Share a single cutout with friends and family by emailing it to them
+- Share a cutout on social media by copying it's permalink
 
 ### Why?
 
@@ -16,6 +18,15 @@ The internet has a lot of good content, blog posts, articles, etc etc. I read a 
 of stuff, and then could not find them again when I wanted to. Pocket is good for saving
 for later, Delicious and Pinterest are overkill for something as simple. Hence, this 
 project!
+
+### Manual Testing
+
+- login and logout
+- login, add a public cutout, check that it is accessible without login, logout
+- login, add an unlisted cutout, check that it is accessible without login, logout
+- login, add a private cutout, ensure that it isn't accessibly without login,
+    logout
+- edit an cutout's visibility and check if the changes are reflected
 
 ## Release Notes
 
