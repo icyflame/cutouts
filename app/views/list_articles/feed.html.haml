@@ -2,9 +2,13 @@
   .col-md-3
   .center.col-md-6
     = render 'shared/list_several_articles', articles: @articles, partial: "shared/article_single_show_feed"
+    %hr{:style => "border-color: grey;"}
+    - if @page >= 2
+      %a.btn.btn-primary{:href => "#{feed_path}?page=#{@page-2}"}
+        Prev Page
     - if @show_next_page
       .pull-right
         %a.btn.btn-primary{:href => "#{feed_path}?page=#{@page}"}
           Next Page
-        %br/
-        %br/
+    %br/
+    %br/
