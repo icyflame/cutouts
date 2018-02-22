@@ -6,6 +6,8 @@ class ListArticlesController < ApplicationController
 
   def feed
     @page = params[:page] ? params[:page].to_i : 0
+    @page = @page >= 0 ? @page : 0
+
     @articles = Article.where({ :visibility => 0 }).limit(20).offset(@page * 20)
     @page = @page + 1
 
