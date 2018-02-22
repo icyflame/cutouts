@@ -23,10 +23,9 @@ Rails.application.routes.draw do
     get '/' => 'static#about'
   end
 
-
   get 'list_articles/index'
 
-  get 'static/index'
+  get '/feed' => 'list_articles#feed'
 
   get 'user/export_articles'
 

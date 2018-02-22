@@ -1,0 +1,10 @@
+.row
+  .col-md-3
+  .center.col-md-6
+    = render 'shared/list_several_articles', articles: @articles, partial: "shared/article_single_show_feed"
+    - if @show_next_page
+      .pull-right
+        %a.btn.btn-primary{:href => "#{feed_path}?page=#{@page}"}
+          Next Page
+        %br/
+        %br/
