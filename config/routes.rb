@@ -35,8 +35,6 @@ Rails.application.routes.draw do
   get 'users' => 'user#index'
   get ':username' => 'user#public_page'
 
-  get 'articles' => 'article#index'
-
   get 'article/:id/share' => 'article#share'
   post 'article/:id/share' => 'article#send_share'
 

@@ -8,8 +8,6 @@ class UserController < ApplicationController
 
   def public_page
     user = User.where({ username: params[:username] }).first
-    p user
-    p user == nil
     if user == nil
       redirect_to root_path, alert: "Username #{params[:username]} doesn't exist! You can create an account with that username if you would like to!"
       return
