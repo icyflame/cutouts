@@ -3,6 +3,7 @@ class ArticleController < ApplicationController
   before_filter :authenticate_user!, :except => [:show]
 
   def index
+    params[:input] = "" if params[:input] == nil
     if params[:input].match(/^tag:/i)
       requiredTag = params[:input][4...params[:input].size]
       requiredTag = URI::decode(requiredTag)
