@@ -28,4 +28,8 @@ module ArticleHelper
 
     fa_icon(icons[ind], class: "fa-2x", title: tips[ind])
   end
+
+  def link_placeholder link
+    link.slice(0, 10) + "..."
+  end
 end
