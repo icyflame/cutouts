@@ -2,6 +2,8 @@
 
 > Sign up, and start adding the articles that you have read and want to remember! Deployed [here](https://cutouts.siddharthkannan.in)
 
+[![Build Status](https://travis-ci.org/icyflame/cutouts.svg?branch=master)](https://travis-ci.org/icyflame/cutouts)
+
 You can find the Firefox companion add-on [here](https://addons.mozilla.org/en-US/firefox/addon/cutouts-firefox-extension/)
 
 ### What?
