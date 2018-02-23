@@ -3,11 +3,13 @@
     %meta{'http-equiv' => 'Content-Type', 'content' => "text/html; charset=utf8"}/
 
   %body
-    %h1 Cutouts
+    %a{:href => fully_qualified_root_url}
+      %h1 Cutouts
     = yield
     %hr/
-    %p.text-muted
-      Cutouts is an online bookmarking application which allows you to cut out
+    %p
+      %a{:href => "#{fully_qualified_root_url}"} Cutouts
+      is an online bookmarking application which allows you to cut out
       parts of online articles and store them forever. It is hosted on Heroku.
       It is completely free. The code is open source and can be found at
       %a{:href => "https://github.com/icyflame/cutouts"} GitHub

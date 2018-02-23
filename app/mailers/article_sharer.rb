@@ -1,6 +1,7 @@
 class ArticleSharer < ActionMailer::Base
   default from: "Cutouts <cutouts@siddharthkannan.in>"
   layout "mailer"
+  add_template_helper(ApplicationHelper)
 
   def share_article(article, emails, from_user, share_as)
     @article = article
