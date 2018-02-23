@@ -4,6 +4,7 @@ ruby '2.3.1'
 gem 'dotenv-rails', :groups => [:development, :test]
 gem 'factory_bot', :groups => [:development, :test]
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master', group: [:development, :test]
+gem 'simplecov', require: false, group: :test
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
