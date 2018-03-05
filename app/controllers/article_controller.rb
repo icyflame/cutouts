@@ -97,15 +97,26 @@ class ArticleController < ApplicationController
             " by #{@article.user.username} on #{@article.created_at.to_date.to_formatted_s :long}." +
             " \"#{quote_slice}\""
 
-    set_meta_tags og: { title: heading, 
+  set_meta_tags og: { title: heading,
                         description: desc,
                         url: show_url(@article), 
                         type: "article",
-                        "article.author" => @article.author,
+                        article: {
+                          author: @article.author
+                        },
                         image: cutouts_show_image_url },
-                  title: heading,
-                  description: desc,
-                  reverse: true
+                        twitter: {
+                          card: "summary",
+                          title: heading,
+                          description: desc,
+                          image: {
+                            _: cutouts_show_image_url,
+                            alt: "Scissors"
+                          }
+                        },
+                        title: heading,
+                        description: desc,
+                        reverse: true
   end
 
   def share
