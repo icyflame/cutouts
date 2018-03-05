@@ -90,6 +90,22 @@ class ArticleController < ApplicationController
       return
     end
     @article = temp[0]
+
+    heading = article_title @article
+    quote_slice = @article.quote.slice(0, 30) + (@article.quote.length > 30 ? "..." : "")
+    desc = "Cutout from #{link_host @article}" +
+            " by #{@article.user.username} on #{@article.created_at.to_date.to_formatted_s :long}." +
+            " \"#{quote_slice}\""
+
+    set_meta_tags og: { title: heading, 
+                        description: desc,
+                        url: show_url(@article), 
+                        type: "article",
+                        "article.author" => @article.author,
+                        image: cutouts_show_image_url },
+                  title: heading,
+                  description: desc,
+                  reverse: true
   end
 
   def share

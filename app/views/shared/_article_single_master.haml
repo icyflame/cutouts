@@ -7,10 +7,7 @@
 %div.article_single
 
   %a{:href => object.link, :target => "_blank", :style => "font-size: 19px"}
-    - title_exists = object.title && object.title.length > 0
-    - link_valid = object.link =~ URI::regexp
-    - to_disp = title_exists ? object.title : (link_valid ? URI(object.link).host : link_placeholder(object.link))
-    #{to_disp} #{fa_icon("external-link")}
+    #{article_title object} #{fa_icon("external-link")}
 
   %span &nbsp; &nbsp; #{viz_icon object.visibility}
 

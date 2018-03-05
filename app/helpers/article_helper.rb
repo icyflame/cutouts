@@ -1,4 +1,5 @@
 module ArticleHelper
+  include ApplicationHelper
   def allowed_params
     forbidden_params = [ "id", "created_at", "updated_at", "user_id" ]
     Article.column_names.select { |s| !forbidden_params.include? s }
@@ -31,5 +32,31 @@ module ArticleHelper
 
   def link_placeholder link
     link.slice(0, 10) + "..."
+  end
+
+  def link_host object
+    link_valid = object.link =~ URI::regexp
+    if link_valid
+      URI(object.link).host
+    else
+      link_placeholder(object.link)
+    end
+  end
+
+  def article_title object
+    title_exists = object.title && object.title.length > 0
+    if title_exists
+      object.title
+    else
+      link_host object
+    end
+  end
+
+  def show_url article
+    fully_qualified_root_url + "/article/#{article.id}"
+  end
+
+  def cutouts_show_image_url
+    "http://cliparts.co/cliparts/dc4/okg/dc4okgKxi.jpg"
   end
 end
