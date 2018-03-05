@@ -127,6 +127,8 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.0)
       mini_mime (>= 0.1.1)
+    meta-tags (2.8.0)
+      actionpack (>= 3.2.0, < 5.3)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
@@ -260,6 +262,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails
+  meta-tags
   pg (~> 0.11)
   rabl
   rails
