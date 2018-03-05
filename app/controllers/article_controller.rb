@@ -107,6 +107,7 @@ class ArticleController < ApplicationController
                         image: cutouts_show_image_url },
                         twitter: {
                           card: "summary",
+                          site: "@CutoutsApp",
                           title: heading,
                           description: desc,
                           image: {
