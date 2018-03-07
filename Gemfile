@@ -58,3 +58,4 @@ gem 'redcarpet'
 gem "font-awesome-rails"
 gem "rabl"
 gem "meta-tags"
+gem "responders"

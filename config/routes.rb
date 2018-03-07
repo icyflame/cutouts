@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   scope '/api' do
     scope '/v1' do
+      scope '/feed' do
+        get '/' => 'api_helpers#public_feed'
+        get '/:username' => 'api_helpers#public_feed_for_user'
+      end
       scope '/articles' do
         post '/' => 'api_helpers#article_create'
         get '/' => 'api_helpers#articles_list'
