@@ -1,4 +1,5 @@
 class UserController < ApplicationController
+  include ApplicationHelper
   before_filter :authenticate_user!, except: [ :public_page ]
 
   def index
@@ -14,6 +15,31 @@ class UserController < ApplicationController
     end
 
     @allArticles = user.articles.where ({ :visibility => Article.visibilities["open"] })
+
+    heading = "@#{user.username}'s cutouts"
+    desc = "@#{user.username} has #{@allArticles.length} public cutouts."
+
+    set_meta_tags og: { title: heading,
+                        description: desc,
+                        url: user_public_page_url(user.username),
+                          type: "article",
+                        article: {
+                          author: user.username
+                        },
+                        image: cutouts_show_image_url },
+                        twitter: {
+                          card: "summary",
+                          site: "@CutoutsApp",
+                          title: heading,
+                          description: desc,
+                          image: {
+                            _: cutouts_show_image_url,
+                            alt: "Scissors"
+                          }
+                        },
+                        title: heading,
+                        description: desc,
+                        reverse: true
   end
 
   def export_articles

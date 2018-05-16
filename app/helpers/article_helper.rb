@@ -55,8 +55,4 @@ module ArticleHelper
   def show_url article
     fully_qualified_root_url + "/article/#{article.id}"
   end
-
-  def cutouts_show_image_url
-    "http://cliparts.co/cliparts/dc4/okg/dc4okgKxi.jpg"
-  end
 end

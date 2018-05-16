@@ -1,5 +1,6 @@
 class ArticleController < ApplicationController
   include ArticleHelper
+  include ApplicationHelper
   before_filter :authenticate_user!, :except => [:show]
 
   def index
@@ -95,10 +96,10 @@ class ArticleController < ApplicationController
     quote_slice_size = 100
     quote_slice = @article.quote.slice(0, quote_slice_size) + (@article.quote.length > quote_slice_size ? "..." : "")
     desc = "Cutout from #{link_host @article}" +
-            " by #{@article.user.username} on #{@article.created_at.to_date.to_formatted_s :long}." +
-            " \"#{quote_slice}\""
+      " by #{@article.user.username} on #{@article.created_at.to_date.to_formatted_s :long}." +
+      " \"#{quote_slice}\""
 
-  set_meta_tags og: { title: heading,
+    set_meta_tags og: { title: heading,
                         description: desc,
                         url: show_url(@article), 
                         type: "article",
