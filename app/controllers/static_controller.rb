@@ -1,4 +1,5 @@
 class StaticController < ApplicationController
+  include ApplicationHelper
   def index
     if user_signed_in?
       redirect_to "/users/"
