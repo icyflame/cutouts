@@ -8,7 +8,11 @@ class ListArticlesController < ApplicationController
     @page = params[:page] ? params[:page].to_i : 0
     @page = @page >= 0 ? @page : 0
 
-    @articles = Article.where({ :visibility => 0 }).where.not({ user_id: current_user.id }).limit(20).offset(@page * 20)
+    @articles = Article.where({ :visibility => 0 }).limit(20).offset(@page * 20)
+    if current_user != nil
+      @articles = Article.where({ :visibility => 0 }).where.not({ user_id: current_user.id }).limit(20).offset(@page * 20)
+    end
+
     @page = @page + 1
 
     # decide whether to show the next page
