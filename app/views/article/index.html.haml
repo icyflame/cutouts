@@ -1,3 +1,6 @@
 - # TODO: Figure out layout (boxes like Pocket?) ; Should look good in responsive as well
+= form_tag article_index_path, :method => :get do
+  = text_field_tag :input, params[:input]
+  = submit_tag "Search"
 - @searchArticles.each do |article|
   = render 'shared/article_single', :object => article
