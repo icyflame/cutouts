@@ -146,7 +146,15 @@ class ArticleController < ApplicationController
     # send emails to atmost 5 people at once
     valid_emails = valid_emails.slice(0, 5)
 
-    ArticleSharer.share_article(article, valid_emails, current_user, params[:share_as]).deliver
+    # find out if this user should be cc'ed
+    cc_author = params[:cc_myself]
+
+    ArticleSharer.share_article(article,
+                                valid_emails,
+                                current_user,
+                                params[:share_as],
+                                cc_author,
+                                params[:comments]).deliver
 
     redirect_to root_path, notice: "Article shared with #{valid_emails.join ", "}"
   end

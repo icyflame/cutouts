@@ -1,4 +1,6 @@
-%p= "#{@from_username} has shared a Cutout from #{@article.link =~ URI::regexp ? URI(@article.link).host : "#{@article.link.slice(0, 10)}..."} with you"
+%p= "#{@from_username} has shared a Cutout from #{@article.link =~ URI::regexp ? URI(@article.link).host : "#{@article.link.slice(0, 10)}..."} with you."
+- if @comments != nil && @comments.length > 0
+  %p= @comments
 %blockquote= @article.quote
 %p= "written by #{@article.author}"
 %a{:href => @article.link} See the complete article here!
