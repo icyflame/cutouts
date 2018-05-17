@@ -17,7 +17,7 @@ module ApplicationHelper
 
   def understand_query query
     tags = [ ]
-    terms = [ ]
+    terms = ""
 
     tag_re = /tag:([a-z0-9\-]+)/i
     t1 = query.scan(tag_re)
@@ -26,6 +26,15 @@ module ApplicationHelper
       if i.length > 0 and i[0].is_a? String
         tags.push i[0]
       end
+    end
+
+    t2 = query.split(tags[-1])
+    if t2.length > 1
+      terms = t2[-1]
+    end
+
+    if terms != nil and terms.is_a? String
+      terms = terms.strip
     end
 
     return tags, terms

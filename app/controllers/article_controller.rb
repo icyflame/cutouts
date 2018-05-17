@@ -6,10 +6,12 @@ class ArticleController < ApplicationController
   def index
     params[:input] = "" if params[:input] == nil
     tags, terms = understand_query(params[:input])
-    if tags.length > 0
+    if tags.length > 0 and terms.length == 0
       @searchArticles = current_user.articles.searchForTags tags
+    elsif tags.length > 0 and terms.length > 0
+      @searchArticles = current_user.articles.searchForTagsAndTerms tags, terms
     else
-      @searchArticles = current_user.articles.search terms.join(", ")
+      @searchArticles = current_user.articles.search params[:input]
     end
   end
 

@@ -13,19 +13,35 @@ class Article < ActiveRecord::Base
     return self.tags.split(',').uniq.map(&:strip)
   end
 
-  def self.search input
-    return where("LOWER(quote) like LOWER('%#{input}%') 
-                 or LOWER(author) like LOWER('%#{input}%') 
+  def self.terms_query input
+    "LOWER(quote) like LOWER('%#{input}%')
+                 or LOWER(author) like LOWER('%#{input}%')
                  or LOWER(link) like LOWER('%#{input}%') 
-                 or LOWER(tags) like LOWER('%#{input}')")
+                 or LOWER(tags) like LOWER('%#{input}')"
+  end
+
+  def self.search input
+    return where(terms_query input)
+  end
+
+  def self.tags_query tags
+    q1 = [ ]
+    for i in tags
+      q1.push "LOWER(tags) LIKE LOWER('%#{i}%')"
+    end
+    q1 = q1.join(" and ")
+    return q1
   end
 
   def self.searchForTags tags
-    query = [ ]
-    for i in tags
-      query.push "LOWER(tags) LIKE LOWER('%#{i}%')"
-    end
-    query = query.join(" and ")
-    return where(query)
+    return where(tags_query tags)
   end
+
+  def self.searchForTagsAndTerms tags, terms
+    q1 = tags_query tags
+    q2 = terms_query terms
+
+    return where("#{q1} and (#{q2})")
+  end
+
 end
