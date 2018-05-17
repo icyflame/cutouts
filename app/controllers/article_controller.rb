@@ -5,12 +5,11 @@ class ArticleController < ApplicationController
 
   def index
     params[:input] = "" if params[:input] == nil
-    if params[:input].match(/^tag:/i)
-      requiredTag = params[:input][4...params[:input].size]
-      requiredTag = URI::decode(requiredTag)
-      @searchArticles = current_user.articles.searchForTag requiredTag
+    tags, terms = understand_query(params[:input])
+    if tags.length > 0
+      @searchArticles = current_user.articles.searchForTags tags
     else
-      @searchArticles = current_user.articles.search params[:input]
+      @searchArticles = current_user.articles.search terms.join(", ")
     end
   end
 

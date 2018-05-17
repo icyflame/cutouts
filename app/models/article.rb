@@ -20,7 +20,12 @@ class Article < ActiveRecord::Base
                  or LOWER(tags) like LOWER('%#{input}')")
   end
 
-  def self.searchForTag input
-    return where("LOWER(tags) like LOWER('%#{input}%')")
+  def self.searchForTags tags
+    query = [ ]
+    for i in tags
+      query.push "LOWER(tags) LIKE LOWER('%#{i}%')"
+    end
+    query = query.join(" and ")
+    return where(query)
   end
 end
