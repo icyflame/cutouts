@@ -45,7 +45,7 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 gem 'rails_12factor', group: :production
 
-gem 'sprockets-rails', '~> 2.3.2'
+gem 'sprockets-rails', '~> 3'
 gem 'bootstrap', '~> 4.0.0'
 gem 'devise'
 gem 'rails_admin'
