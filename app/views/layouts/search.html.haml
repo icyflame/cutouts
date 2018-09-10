@@ -36,13 +36,6 @@
       %p.alert.alert-danger= alert
     = yield
 
-    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.0.4/fuse.min.js"}
-    %script
-      var options = {keys: ["title"]}
-      var fuse = new Fuse(gon.articles, options)
-      var result = fuse.search("singapore")
-      console.log(result)
-
     %hr{:style => "border-color: grey;"}
     %p
       Cutouts is an

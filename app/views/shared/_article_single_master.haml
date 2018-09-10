@@ -4,7 +4,7 @@
 -# if user_page is set, then the edit cutout and delete cutout buttons will be shown
 - user_page = user_page || false
 
-%div.article_single
+%div.article_single{id: "article-id-#{object.id}"}
 
   %a{:href => object.link, :target => "_blank", :style => "font-size: 19px"}
     #{article_title object} #{fa_icon("external-link")}

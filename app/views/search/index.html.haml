@@ -1,4 +1,31 @@
 %h1
   You have a total of #{@articles.count} Articles
-%p
-  #{@articles}
+
+%input.form-control{type: "text", value: "#{@search_string}", placeholder: "Start entering your search to show a list of results", id: "search_page_field", autofocus: true }
+%div.reference-html
+  = render 'shared/list_several_articles', articles: @articles, partial: "shared/article_single"
+
+%div.result
+
+%script{src: "https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.0.4/fuse.min.js"}
+:javascript
+  $(".reference-html").hide()
+  var options = {
+    keys: ["title", "author", "quote", "tags", "link"],
+    shouldSort: true,
+    minMatchCharLength: 3
+  }
+
+  var fuse = new Fuse(gon.articles, options)
+
+  $("#search_page_field").on('input', function() {
+    var search_query = $("#search_page_field").val();
+    var result = fuse.search(search_query);
+
+    $(".result").empty()
+    if (search_query.length > 0) {
+      for (var i = 0; i < result.length; i++) {
+        $("#article-id-" + result[i].id).clone().appendTo(".result");
+      }
+    }
+  })
