@@ -84,6 +84,10 @@ GEM
       railties (>= 3.2, < 5.2)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    gon (6.2.1)
+      actionpack (>= 3.0)
+      multi_json
+      request_store (>= 1.0)
     haml (5.0.4)
       temple (>= 0.8.0)
       tilt
@@ -197,6 +201,8 @@ GEM
     rdoc (4.3.0)
     redcarpet (3.4.0)
     remotipart (1.4.2)
+    request_store (1.4.1)
+      rack (>= 1.4)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -259,6 +265,7 @@ DEPENDENCIES
   factory_bot
   faker!
   font-awesome-rails
+  gon
   haml-rails
   jbuilder (~> 2.0)
   jquery-rails

@@ -60,3 +60,4 @@ gem "rabl"
 gem "meta-tags"
 gem "responders"
 gem 'puma'
+gem "gon"

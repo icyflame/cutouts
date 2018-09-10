@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'search' => 'search#index'
+
   scope '/about/' do
     get '/' => 'static#about'
   end
