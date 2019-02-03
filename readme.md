@@ -72,7 +72,9 @@ project!
     [Firefox add-on][8]
     to make it easier to Cutout articles from Firefox
 
-## TODO (in descending order of priority)
+## TODO
+
+> In descending order of priority
 
 - [x] Create a good homepage that has a few words about why this project at all
 - [ ] User must be able to login with both username as well as email
@@ -96,7 +98,7 @@ Copyright (c) 2015-2019 [Siddharth Kannan](http://icyflame.github.io) All Rights
 [2]: #why
 [3]: #manual-test-plan
 [4]: #release-notes
-[5]: #v10--2018-12-07
+[5]: #v10---2018-12-07
 [6]: #todo
 [7]: #api-documentation
 [8]: https://addons.mozilla.org/en-US/firefox/addon/cutouts-firefox-extension/
