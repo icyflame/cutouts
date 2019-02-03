@@ -43,7 +43,23 @@ project!
 
 ## API Documentation
 
-> TODO
+> Check the [routes][13] file for the latest available routes
+
+All responses are JSON formatted.
+
+### `GET /api/v1/feed`
+
+- Returns the list of top 20 articles from the public feed
+- Public
+- Auth not required
+- Rate limited
+
+### `GET /api/v1/feed/:username`
+
+- Returns the top 20 public articles of the given user
+- Public
+- Auth not required
+- Rate limited
 
 ## Release Notes
 
@@ -78,7 +94,7 @@ project!
 
 - [x] Create a good homepage that has a few words about why this project at all
 - [ ] User must be able to login with both username as well as email
-	- Override devise? (Devise procedure [here](https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign-in-using-their-username-or-email-address) seems extremely long)
+	- Override devise? (Devise procedure [here][12] seems extremely long)
 - [ ] Fix the word limit on quote (50 words?)
 - [x] Fix the sign-in and sign-up form UI
 - [x] Fix the horrible UI to make it usable at the very least (copy medium, that interface is too good!)
@@ -98,10 +114,12 @@ Copyright (c) 2015-2019 [Siddharth Kannan](http://icyflame.github.io) All Rights
 [2]: #why
 [3]: #manual-test-plan
 [4]: #release-notes
-[5]: #v10---2018-12-07
+[5]: #v10---2018-02-07
 [6]: #todo
 [7]: #api-documentation
 [8]: https://addons.mozilla.org/en-US/firefox/addon/cutouts-firefox-extension/
 [9]: https://travis-ci.org/icyflame/cutouts.svg?branch=master
 [10]: https://travis-ci.org/icyflame/cutouts
 [11]: https://cutouts.siddharthkannan.in
+[12]: https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign-in-using-their-username-or-email-address
+[13]: https://github.com/icyflame/cutouts/blob/add-api-documentation/config/routes.rb
