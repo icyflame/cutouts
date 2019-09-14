@@ -11,6 +11,8 @@ You can find the Firefox companion add-on [here][8]
 
 - [What?][1]
 - [Why?][2]
+- [Local Setup][14]
+  - [Creating a local test user][18]
 - [Manual Test Plan][3]
 - [API Documentation][7]
 - [Release Notes][4]
@@ -31,6 +33,59 @@ The internet has a lot of good content, blog posts, articles, etc etc. I read a 
 of stuff, and then could not find them again when I wanted to. Pocket is good for saving
 for later, Delicious and Pinterest are overkill for something as simple. Hence, this 
 project!
+
+## Local Setup
+
+**Note:** These steps were tested on a machine running Ubuntu 18.04 LTS.
+
+- Install `rbenv`
+- Install ruby version `2.3.1`
+  - If you see an error message asking you to intall `libssl-dev`, install
+  `libssl1.0-dev` using `apt-get` and then run `rbenv install 2.3.1` again.
+    - [Discussion on an issue in the rbenv/ruby-build repository][15]
+- Install bundler version `1.16.0`
+- Run `bundle install`
+  - If you see an [error regarding][16] the `ffi` gem, then install `libffi-dev`
+  - If you see an [error regarding][17] the `pg` gem, then install `libpq-dev`
+  - If you see an error regarding the `sqlite3` gem, then install
+  `libsqlite3-dev`
+- [TEST] Run `./bin/rails --version`
+  - This ensures that you have the rails gem installed locally
+- Install `zeus` (the recommended development server)
+    - `gem install zeus`
+    - Run `zeus start` in a window to start the zeus server
+    - Run `zeus rake db:migrate RAILS_ENV=development` to migrate all the tables
+    onto your local sqlite3 database
+    - Run `zeus server` to start the server on http://localhost:3000
+    - Visit the server link to check out your app
+
+### Creating a local test user
+
+- Go to http://localhost:3000
+- Create a user using the `Sign Up` button
+- Now, you will be shown a prompt on the home page saying you must confirm your
+user by clicking the confirmation link in your email.
+- To do this process directly on the database, you can do:
+  - Go into the rails console: `zeus console`
+  - Get your user: `User.all` or `User.first`
+  - Confirm your user: `user.confirm`
+- After confirming a user, you should be able to login to your account locally.
+
+A log of the commands to run and their output:
+
+```irb
+irb(main):007:0> User.first
+  User Load (0.5ms)  SELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1
+=> #<User id: 1, email: "a@example.com", username: "a1", created_at: "2019-09-14 04:29:01", updated_at: "2019-09-14 04:29:01">
+irb(main):009:0> User.first.confirm
+  User Load (0.5ms)  SELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1
+   (0.2ms)  begin transaction
+  SQL (0.7ms)  UPDATE "users" SET "confirmed_at" = ?, "updated_at" = ? WHERE "users"."id" = ?  [["confirmed_at", "2019-09-14 04:32:42.534172"], ["updated_at", "2019-09-14 04:32:42.542307"], ["id", 1]]
+   (6.1ms)  commit transaction
+=> true
+```
+
+You can use this process to confirm all locally created users.
 
 ## Manual Test Plan
 
@@ -123,3 +178,8 @@ Copyright (c) 2015-2019 [Siddharth Kannan](http://icyflame.github.io) All Rights
 [11]: https://cutouts.siddharthkannan.in
 [12]: https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign-in-using-their-username-or-email-address
 [13]: https://github.com/icyflame/cutouts/blob/add-api-documentation/config/routes.rb
+[14]: #local-setup
+[15]: https://github.com/rbenv/ruby-build/issues/1215#issuecomment-399687588
+[16]: https://stackoverflow.com/a/43926527/2080089
+[17]: https://stackoverflow.com/a/46914751/2080089
+[18]: #creating-a-local-test-user
