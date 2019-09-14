@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20180210205553) do
 
-  create_table "admins", force: true do |t|
+  create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20180210205553) do
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
 
-  create_table "articles", force: true do |t|
+  create_table "articles", force: :cascade do |t|
     t.string   "link"
     t.text     "quote"
     t.string   "author"
@@ -45,14 +45,14 @@ ActiveRecord::Schema.define(version: 20180210205553) do
 
   add_index "articles", ["user_id"], name: "index_articles_on_user_id"
 
-  create_table "sessions", force: true do |t|
+  create_table "sessions", force: :cascade do |t|
     t.string   "sid"
     t.string   "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email"
     t.string   "username"
     t.datetime "created_at"
