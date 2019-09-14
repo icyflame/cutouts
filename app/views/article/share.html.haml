@@ -2,7 +2,7 @@
   .col-md-3
   .center.col-md-6
     = render 'shared/article_single_show', :object => @thisOne
-    %h1 Share this Cutout!
+    %h3 Share this Cutout!
     =form_tag("#{article_path(@thisOne)}/share", method: :post, class: "form") do
       = text_field_tag "emails", "", { :placeholder => "Please enter comma separated email IDs to share with here (maximum 5)", :required => true }
       = text_field_tag "share_as", "", { :placeholder => "The name that will be on the email. Default: #{current_user.username}" }
