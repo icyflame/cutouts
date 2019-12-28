@@ -39,25 +39,11 @@ project!
 **Note:** These steps were tested on a machine running Ubuntu 18.04 LTS.
 
 - Install `rbenv`
-- Install ruby version `2.3.1`
-  - If you see an error message asking you to intall `libssl-dev`, install
-  `libssl1.0-dev` using `apt-get` and then run `rbenv install 2.3.1` again.
-    - [Discussion on an issue in the rbenv/ruby-build repository][15]
-- Install bundler version `1.16.0`
+- Install ruby version `2.7.0`
+- Install bundler version `2.12.0`
 - Run `bundle install`
-  - If you see an [error regarding][16] the `ffi` gem, then install `libffi-dev`
-  - If you see an [error regarding][17] the `pg` gem, then install `libpq-dev`
-  - If you see an error regarding the `sqlite3` gem, then install
-  `libsqlite3-dev`
 - [TEST] Run `./bin/rails --version`
   - This ensures that you have the rails gem installed locally
-- Install `zeus` (the recommended development server)
-    - `gem install zeus`
-    - Run `zeus start` in a window to start the zeus server
-    - Run `zeus rake db:migrate RAILS_ENV=development` to migrate all the tables
-    onto your local sqlite3 database
-    - Run `zeus server` to start the server on http://localhost:3000
-    - Visit the server link to check out your app
 
 ### Creating a local test user
 
