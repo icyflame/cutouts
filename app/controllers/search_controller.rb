@@ -1,5 +1,5 @@
 class SearchController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   layout "search"
   def index
     @articles = current_user.articles

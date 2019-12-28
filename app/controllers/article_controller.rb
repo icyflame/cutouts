@@ -1,7 +1,7 @@
 class ArticleController < ApplicationController
   include ArticleHelper
   include ApplicationHelper
-  before_filter :authenticate_user!, :except => [:show]
+  before_action :authenticate_user!, :except => [:show]
 
   def index
     params[:input] = "" if params[:input] == nil

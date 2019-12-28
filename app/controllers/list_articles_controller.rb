@@ -1,5 +1,5 @@
 class ListArticlesController < ApplicationController
-	before_filter :authenticate_user!, :except => [ :feed ]
+	before_action :authenticate_user!, :except => [ :feed ]
   def index
 		@allArticles = current_user.articles
   end
