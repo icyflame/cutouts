@@ -1,4 +1,4 @@
-class ChangeQuoteColumnUsers < ActiveRecord::Migration
+class ChangeQuoteColumnUsers < ActiveRecord::Migration[4.2]
   def self.up
 		change_column :articles, :quote, :text
   end

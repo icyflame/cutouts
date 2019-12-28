@@ -1,7 +1,7 @@
 class ArticleController < ApplicationController
   include ArticleHelper
   include ApplicationHelper
-  before_filter :authenticate_user!, :except => [:show]
+  before_action :authenticate_user!, :except => [:show]
 
   def index
     params[:input] = "" if params[:input] == nil
@@ -17,11 +17,11 @@ class ArticleController < ApplicationController
 
   def create
     temp = current_user.articles.create
-
-    get_article_params(params).map { |k, v| temp[k.to_s] = v }
+    article_params = get_article_params(params)
+    article_params.map { |k, v| temp[k] = v }
 
     if !temp.valid?
-      redirect_to new_article_path(get_article_params(params))
+      redirect_to new_article_path(article_params)
       return
     end
 
@@ -38,7 +38,7 @@ class ArticleController < ApplicationController
 
     if @populated
       @article = current_user.articles.create
-      get_article_params(params).map { |k, v| @article[k.to_s] = v }
+      get_article_params(params).map { |k, v| @article[k] = v }
       @article.valid?
     end
   end
@@ -73,11 +73,13 @@ class ArticleController < ApplicationController
     end
 
     temp = Article.find(params[:id])
-    params.keys.each { |key| temp[key] = params[key] if Article.column_names.include?(key) }
+    get_article_params(params).map { |k, v| temp[k] = v }
+
     if !temp.valid?
       redirect_to edit_article_path(temp), alert: "OOPS! There were errors in that article: #{temp.errors.full_messages.join '; '}"
       return
     end
+
     if temp.save!
       redirect_to root_path, notice: "Article updated!"
     else

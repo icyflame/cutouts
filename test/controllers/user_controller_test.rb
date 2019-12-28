@@ -26,16 +26,14 @@ class UserControllerTest < ActionController::TestCase
   end
 
   test "public page should be available to the public" do
-    get :public_page, { :username => "carson" }
+    get :public_page, params: { username: "carson" }
     assert_response 200
   end
 
   test "public page should be available to signed in users" do
     user = FactoryBot.create(:user)
     sign_in user
-
-    get :public_page, { :username => "carson" }
-
+    get :public_page, params: { username: "carson" }
     assert_response 200
   end
 

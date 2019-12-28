@@ -1,6 +1,6 @@
 class UserController < ApplicationController
   include ApplicationHelper
-  before_filter :authenticate_user!, except: [ :public_page ]
+  before_action :authenticate_user!, except: [ :public_page ]
 
   def index
     @allArticles = current_user.articles.all.limit(10)

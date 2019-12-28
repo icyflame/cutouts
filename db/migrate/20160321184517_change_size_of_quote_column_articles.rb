@@ -1,4 +1,4 @@
-class ChangeSizeOfQuoteColumnArticles < ActiveRecord::Migration
+class ChangeSizeOfQuoteColumnArticles < ActiveRecord::Migration[4.2]
   def self.up
 		change_column :articles, :quote, :text, :limit => nil
   end

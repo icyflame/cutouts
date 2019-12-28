@@ -31,7 +31,7 @@ You can find the Firefox companion add-on [here][8]
 
 The internet has a lot of good content, blog posts, articles, etc etc. I read a lot
 of stuff, and then could not find them again when I wanted to. Pocket is good for saving
-for later, Delicious and Pinterest are overkill for something as simple. Hence, this 
+for later, Delicious and Pinterest are overkill for something as simple. Hence, this
 project!
 
 ## Local Setup
@@ -89,11 +89,14 @@ You can use this process to confirm all locally created users.
 
 ## Manual Test Plan
 
+- sign-up
+  - confirm a new user using: `User.find(...).confirm`
 - login and logout
 - login, add a public cutout, check that it is accessible without login, logout
-- login, add an unlisted cutout, check that it is accessible without login, logout
+- login, add an unlisted cutout, check that it is accessible without login,
+  logout
 - login, add a private cutout, ensure that it isn't accessibly without login,
-    logout
+  logout
 - edit an cutout's visibility and check if the changes are reflected
 
 ## API Documentation
@@ -139,7 +142,7 @@ All responses are JSON formatted.
     ![img](./img/v1_3.png)
 
 - A link to the archives of the page that has the Cutout
-- A companion 
+- A companion
     [Firefox add-on][8]
     to make it easier to Cutout articles from Firefox
 

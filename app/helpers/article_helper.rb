@@ -2,12 +2,12 @@ module ArticleHelper
   include ApplicationHelper
   def allowed_params
     forbidden_params = [ "id", "created_at", "updated_at", "user_id" ]
-    Article.column_names.select { |s| !forbidden_params.include? s }
+    Article.column_names.reject { |k| forbidden_params.include? k }
   end
 
-  def get_article_params inp
-    required_keys = allowed_params
-    inp.select { |k, v| required_keys.include? k.to_s }
+  def get_article_params params
+    params.select! { |k| allowed_params.include? k.to_s }
+    fix_types params.stringify_keys.to_unsafe_h
   end
 
   def show_allowed article
@@ -54,5 +54,11 @@ module ArticleHelper
 
   def show_url article
     fully_qualified_root_url + "/article/#{article.id}"
+  end
+
+  private
+
+  def fix_types article
+    article.merge "visibility" => article["visibility"].to_i
   end
 end

@@ -38,5 +38,5 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
   config.active_support.test_order = :sorted
 
-  config.active_record.raise_in_transactional_callbacks = true
+  # config.active_record.raise_in_transactional_callbacks = true
 end
