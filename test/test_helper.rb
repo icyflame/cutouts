@@ -11,7 +11,7 @@ class ActiveSupport::TestCase
   FactoryBot.define do
     factory :user do
       email { Faker::Internet.email }
-      username { Faker::Lorem.words(3).join "_" }
+      username { Faker::Lorem.words(number: 3).join "_" }
       password { "password" }
       password_confirmation { "password" }
       confirmed_at { Date.today }
