@@ -7,7 +7,7 @@ gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master',
 gem 'simplecov', require: false, group: :test
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails'
+gem 'rails', '~> 4.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', group: [:development, :test]
 gem 'pg', '~> 0.11'
@@ -61,3 +61,7 @@ gem 'meta-tags'
 gem 'responders'
 gem 'puma'
 gem 'gon'
+
+# https://github.com/advisories/GHSA-86g5-2wh3-gc9j
+# CVE-2019-5418 published on 2019-03-13
+gem 'actionview', '>= 4.2.11.1'
