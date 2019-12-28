@@ -48,7 +48,7 @@ gem 'rails_12factor', group: :production
 gem 'sprockets-rails'
 gem 'bootstrap'
 gem 'devise'
-gem 'rails_admin'
+gem 'rails_admin', '~> 2.0', git: 'https://github.com/sferik/rails_admin.git'
 gem 'cancan'
 
 gem 'jquery-ui-rails'
