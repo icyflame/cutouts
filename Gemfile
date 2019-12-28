@@ -46,7 +46,7 @@ gem 'spring',        group: :development
 gem 'rails_12factor', group: :production
 
 gem 'sprockets-rails', '~> 3'
-gem 'bootstrap', '~> 4.0.0'
+gem 'bootstrap', '~> 4.1.3'
 gem 'devise'
 gem 'rails_admin'
 gem 'cancan'
