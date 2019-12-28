@@ -74,6 +74,22 @@ irb(main):009:0> User.first.confirm
 
 You can use this process to confirm all locally created users.
 
+### Creating a local admin user
+
+- Create a new `Admin` record
+  ```irb
+  irb(main):035:0> a = Admin.new
+  irb(main):036:0> a.email = "a@example.com"
+  irb(main):039:0> a.password = "password"
+  irb(main):040:0> a.save
+     (0.2ms)  begin transaction
+    Admin Exists? (0.3ms)  SELECT 1 AS one FROM "admins" WHERE "admins"."email" = ? LIMIT ?  [["email", "a@example.com"], ["LIMIT", 1]]
+    Admin Create (0.5ms)  INSERT INTO "admins" ("email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["email", "a@example.com"], ["encrypted_password", "SALTED_HASHED_PASSWORd"], ["created_at", "2019-12-28 18:52:46.213553"], ["updated_at", "2019-12-28 18:52:46.213553"]]
+     (13.7ms)  commit transaction
+  => true
+  ```
+- Login to the admin dashboard at http://localhost:3000/admin
+
 ## Manual Test Plan
 
 - sign-up
