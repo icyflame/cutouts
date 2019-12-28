@@ -43,5 +43,4 @@ class Article < ActiveRecord::Base
 
     return where("#{q1} and (#{q2})")
   end
-
 end
