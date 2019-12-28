@@ -16,6 +16,7 @@ You can find the Firefox companion add-on [here][8]
 - [Manual Test Plan][3]
 - [API Documentation][7]
 - [Release Notes][4]
+  - [v1.1 - 2019-12-28][19]
   - [v1.0 - 2018-12-07][5]
 - [TODO][6]
 
@@ -107,6 +108,11 @@ All responses are JSON formatted.
 
 ## Release Notes
 
+### v1.1 - 2019-12-28
+
+- Switch to Ruby 2.7, Rails 6.0 and the latest version of several gems
+- Switch Heroku's build pack from cedar-14 to heroku-18
+
 ### v1.0 - 2018-02-07
 
 - Add, update, delete cutouts
@@ -172,3 +178,4 @@ Copyright (c) 2015-2019 [Siddharth Kannan](http://icyflame.github.io) All Rights
 [16]: https://stackoverflow.com/a/43926527/2080089
 [17]: https://stackoverflow.com/a/46914751/2080089
 [18]: #creating-a-local-test-user
+[19]: #v11---2019-12-28
