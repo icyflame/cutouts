@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.3.1'
+ruby '2.7.0'
 
 gem 'dotenv-rails', :groups => [:development, :test]
 gem 'factory_bot', :groups => [:development, :test]
@@ -7,7 +7,7 @@ gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master',
 gem 'simplecov', require: false, group: :test
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.0'
+gem 'rails', '~> 6.0', '>= 6.0.2.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', group: [:development, :test]
 gem 'pg', '~> 0.11'
@@ -16,7 +16,7 @@ gem 'sass-rails', '> 4'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
@@ -45,8 +45,8 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 gem 'rails_12factor', group: :production
 
-gem 'sprockets-rails', '~> 3'
-gem 'bootstrap', '~> 4.0.0'
+gem 'sprockets-rails'
+gem 'bootstrap'
 gem 'devise'
 gem 'rails_admin'
 gem 'cancan'
@@ -61,7 +61,3 @@ gem 'meta-tags'
 gem 'responders'
 gem 'puma'
 gem 'gon'
-
-# https://github.com/advisories/GHSA-86g5-2wh3-gc9j
-# CVE-2019-5418 published on 2019-03-13
-gem 'actionview', '>= 4.2.11.1'
