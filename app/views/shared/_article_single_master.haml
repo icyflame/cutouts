@@ -6,12 +6,12 @@
 
 %div.article_single{id: "article-id-#{object.id}"}
 
-  %a{:href => object.link, :target => "_blank", :style => "font-size: 19px"}
-    #{article_title object} #{fa_icon("external-link")}
+  %a{:href => object.link, :target => "_blank"}
+    %span{:style => "font-size: 20px"}
+      #{article_title object} #{fa_icon("external-link")}
+  %span &nbsp; #{viz_icon object.visibility}
 
-  %span &nbsp; &nbsp; #{viz_icon object.visibility}
-
-  %p
+  %p{:style => "font-size: 16px"}
     - if object.author.length > 0
       written by #{object.author}.
     %i{title: "#{object.created_at.to_s}"}
@@ -22,10 +22,10 @@
           by
           %a{:href => "/#{username}", :target => "_blank"}
             @#{username}
-    %a.pull-right{:href => "https://archive.is/#{object.link}", :target => "_blank", :style => "font-size: 19px"}
+    %a.pull-right{:href => "https://archive.is/#{object.link}", :target => "_blank"}
       ARCHIVES
 
-  %p
+  %p{:style => "font-size: 15px"}
     - object.tags_array.each do |tag|
       %a.btn.btn-primary{:href => "#{article_index_path}?input=tag:#{tag}"}= tag
 
@@ -36,6 +36,5 @@
       - if user_page
         #{link_to(fa_icon("pencil", class: "fa-2x"), edit_article_path(object))} &nbsp;
         #{link_to(fa_icon("trash", class: "fa-2x"), article_path(object), method: :delete, data: { confirm: "Are you sure you want to delete that article?" } )}
-
 
   %blockquote.article-quote #{object.quote}
