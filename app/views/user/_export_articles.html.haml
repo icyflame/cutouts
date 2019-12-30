@@ -42,7 +42,7 @@
     %h1
       #{current_user.username}'s Cutouts
     %p
-      exported #{number_with_delimiter(@articles.count)} cutouts on #{Date.today}
+      exported #{pluralize(@articles.count, "cutout") } on #{Date.today}
     %hr
     - @articles.each do |article|
       %article
