@@ -61,3 +61,6 @@ gem 'meta-tags'
 gem 'responders'
 gem 'puma'
 gem 'gon'
+
+# XSS vuln in actionview: `>= 6.0.0, <= 6.0.2.1`
+gem "actionview", ">= 6.0.2.2"
