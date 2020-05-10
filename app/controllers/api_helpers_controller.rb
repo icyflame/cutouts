@@ -1,5 +1,10 @@
 class ApiHelpersController < ApplicationController
   include ApiHelpersHelper
+  before_action :authenticate
+  skip_before_action :authenticate, :only => [ :user_signin ]
+
+  attr_accessor :user
+
 	skip_before_action :verify_authenticity_token
   respond_to :json
 
@@ -156,8 +161,23 @@ class ApiHelpersController < ApplicationController
 		end
 	end
 
-	private
 	def params_doesnt_have_sid(params)
 		not params.keys.include? "sid"
 	end
+
+  def authenticate
+    token = headers.filter { |k, v|
+      k.downcase == "authentication"
+    }.values.first
+    render json: err_resp(msg: "Token required"), status: 401 if token == nil
+
+    token.gsub! (/^Bearer /i, "")
+    session = Session.where(:sid => token).order(created_at: :desc).first
+    render json: err_resp(msg: "Invalid token"), status: 401 if session == nil
+
+    user = User.find(session.user_id)
+    render json: err_resp(msg: "Token not connected to user"), status: 401 if user == nil
+
+    @user = user
+  end
 end
