@@ -1,4 +1,5 @@
 class ApiHelpersController < ApplicationController
+  include ApiHelpersHelper
 	skip_before_action :verify_authenticity_token
   respond_to :json
 
@@ -55,47 +56,59 @@ class ApiHelpersController < ApplicationController
 	# auth_data (== email || == username), auth_password ( == user.password)
 	def user_signin
 		if not params.keys.include? "auth_data" or not params.keys.include? "auth_password"
-			respond_to do |format1|
-				format1.json { render json: { "msg" => "Invalid parameters! Fill in Username / Email and Password." }, status: 400 }
+			respond_to do |format|
+				format.json { render json: err_resp(msg: "Invalid parameters"), status: 400 }
 			end
+      return
 		end
-		respond_to do |format|
-			# figure out if a user exists
-			# Login with Username and Email both are supported
-			if User.where(:email => params[:auth_data]).count > 0
-				this_user = User.where(:email => params[:auth_data]).first
-			elsif User.where(:username => params[:auth_data]).count > 0
-				this_user = User.where(:username => params[:auth_data]).first
-			else
-				format.json { render json: { "error" => "User not found!" }, status: 400 }
-			end
-			if this_user != nil
-				if this_user.valid_password?(params[:auth_password])
-					# create the session for the user
-					this_session = Session.new
-					this_session.user_id = this_user.id
-					this_session.sid = OpenSSL::Digest::SHA256.new((Time.now.to_i + Random.new(Time.now.to_i).rand(1e3)).to_s).hexdigest
-					if this_session.save!
-						format.json { render json: { "msg" => "Successfully logged in!", "res" => { "session" => this_session, "user" => this_user } }, status: 200 }
-					else
-						format.json { render json: { "error" => "Server error, while creating a session!" }, status: 500 }
-					end
-				else
-					# bad password
-					format.json { render json: { "error" => "Bad password!" }, status: 401 }
-				end
-			end
-		end
-	end
 
-	# Creating an article from the parameters
+    # figure out if a user exists
+    # Login with Username and Email both are supported
+    if User.where(:email => params[:auth_data]).count > 0
+      this_user = User.where(:email => params[:auth_data]).first
+    elsif User.where(:username => params[:auth_data]).count > 0
+      this_user = User.where(:username => params[:auth_data]).first
+    else
+      respond_to do |format|
+        format.json { render json: err_resp(msg:"User not found"), status: 400 }
+      end
+      return
+    end
+
+    if this_user.valid_password?(params[:auth_password])
+      # create the session for the user
+      this_session = Session.new
+      this_session.user_id = this_user.id
+      this_session.sid = OpenSSL::Digest::SHA256.new((Time.now.to_i + Random.new(Time.now.to_i).rand(1e3)).to_s).hexdigest
+      if this_session.save!
+        respond_to do |format|
+          format.json { render json: ok_resp(payload: { "session" => this_session, "user" => this_user }), status: 200 }
+        end
+        return
+      else
+        respond_to do |format|
+          format.json { render json: err_resp(msg:"Could not save session"), status: 500 }
+        end
+        return
+      end
+    else
+      respond_to do |format|
+        # bad password
+        format.json { render json: err_resp(msg:"Bad password"), status: 401 }
+      end
+      return
+      return
+    end
+  end
+
+  # Creating an article from the parameters
 	# params must include
 	# sid, link (URL to the article), authors, quote
 	def article_create
 		puts "Paramas doesn't have SID: #{params_doesnt_have_sid params}"
 		respond_to do |format|
 			if params_doesnt_have_sid params
-				format.json { render json: { "error" => "You must provide a session ID!" }, status: 401 }
+				format.json { render json: err_resp(msg: "You must provide a session ID!"), status: 401 }
 			else
 				user_id = get_user_id params[:sid]
 				if user_id
