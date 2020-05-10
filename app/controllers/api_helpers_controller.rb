@@ -8,54 +8,6 @@ class ApiHelpersController < ApplicationController
 	skip_before_action :verify_authenticity_token
   respond_to :json
 
-  # Get the latest 20 articles in the public Cutouts feed
-  # GET /
-  # no parameters required
-  # publicly accessible; no auth required
-  def public_feed
-    articles = Article.where({ :visibility => 0 }).limit(20)
-    respond_to do |format|
-      format.json { render json: { "res" => articles, "err" => false } }
-    end
-  end
-
-  # Get the latest 20 public articles for the given username
-  # GET /
-  # no parameters required
-  # publicly accessible; no auth required
-  def public_feed_for_user
-    username = params[:username]
-    user = User.where({ :username => username }).first
-    respond_to do |format|
-      if user
-        articles = user.articles.where({ :visibility => 0 }).limit(20)
-        format.json { render json: { "res" => articles, "err" => false }, status: 200 }
-      else
-        format.json { render json: { "res" => { }, "error" => "Username doesn't exist" }, status: 404 }
-      end
-    end
-  end
-
-	# Creating a user
-	# Parameters must include
-	# user => [email, username, password, password_confirmation]
-	def user_create
-		respond_to do |format|
-			new_user = User.new params.require(:user).permit(:username, :email, :password, :password_confirmation)
-			if User.where(:email => new_user.email).count > 0
-				format.json { render json: { "error" => "Email ID already taken!" }, status: 400 }
-			elsif User.where(:username => new_user.username).count > 0
-				format.json { render json: { "error" => "Username already taken!" }, status: 400 }
-			elsif new_user.password != new_user.password_confirmation
-				format.json { render json: { "error" => "Passwords don't match! Check, and try again." }, status: 400 }
-			elsif new_user.save
-				format.json { render json: { "res" => new_user }, status: :created }
-			else
-				format.json { render json: { "error" => "Error while creation!"}, status: 500 }
-			end
-		end
-	end
-
 	# Signing in a user
 	# params must include
 	# auth_data (== email || == username), auth_password ( == user.password)
