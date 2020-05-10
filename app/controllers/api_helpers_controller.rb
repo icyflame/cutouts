@@ -3,8 +3,6 @@ class ApiHelpersController < ApplicationController
   before_action :authenticate
   skip_before_action :authenticate, :only => [ :user_signin ]
 
-  attr_accessor :user
-
 	skip_before_action :verify_authenticity_token
   respond_to :json
 
@@ -89,21 +87,12 @@ class ApiHelpersController < ApplicationController
 	# Params must include
 	# sid
 	def articles_list
-		respond_to do |format|
-			if params_doesnt_have_sid params
-				format.json { render json: { "error" => "You must provide a session ID!" }, status: 401 }
-			else
-				user_id = get_user_id params[:sid]
-				if user_id
-					format.json { render json: { "res" => User.find(user_id).articles }, status: 200 }
-				else
-					format.json { render json: { "error" => "Session timed out!" }, status: 401 }
-				end
-			end
-		end
+    render json: ok_resp(payload: { "articles": @user.articles }), status: 200
 	end
 
 	private
+  attr_accessor :user
+
 	def get_user_id(sid)
 		this_session = Session.where("created_at > ?", 10.minutes.ago).where(:sid => sid)
 		if this_session.count > 0
@@ -118,17 +107,33 @@ class ApiHelpersController < ApplicationController
 	end
 
   def authenticate
-    token = headers.filter { |k, v|
-      k.downcase == "authentication"
-    }.values.first
-    render json: err_resp(msg: "Token required"), status: 401 if token == nil
+    token = request.headers.fetch("Authorization", "")
 
-    token.gsub! (/^Bearer /i, "")
+    if token == ""
+      render json: err_resp(msg: "Token required"), status: 401
+      return
+    end
+
+    token_pattern = /^Bearer /
+
+    if !token_pattern.match?(token)
+      render json: err_resp(msg: "Malformed header"), status: 401
+      return
+    end
+
+    token.gsub! token_pattern, ""
+    token = token.split(" ").first
     session = Session.where(:sid => token).order(created_at: :desc).first
-    render json: err_resp(msg: "Invalid token"), status: 401 if session == nil
+    if session == nil
+      render json: err_resp(msg: "Invalid token"), status: 401
+      return
+    end
 
     user = User.find(session.user_id)
-    render json: err_resp(msg: "Token not connected to user"), status: 401 if user == nil
+    if user == nil
+      render json: err_resp(msg: "Token not connected to user"), status: 401
+      return
+    end
 
     @user = user
   end
