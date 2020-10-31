@@ -1,0 +1,20 @@
+version: '2.1'
+
+services:
+  server:
+    build: '.'
+    ports:
+      - 8081:8081
+    environment:
+      RACK_ENV: "production"
+      RAILS_ENV: "production"
+      LANG: "en_US.UTF-8"
+    env_file:
+      - ./production.env
+    networks:
+      server_network:
+        aliases:
+          - server-container
+
+networks:
+  server_network:
