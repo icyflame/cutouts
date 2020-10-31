@@ -19,3 +19,6 @@
 coverage
 
 bin
+
+# Ignore the production.env file for safety
+production.env
