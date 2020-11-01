@@ -1,0 +1,13 @@
+server {
+        listen 80;
+        server_name cutouts.siddharthkannan.in cutouts-stg.siddharthkannan.in;
+
+        location ~ /.well-known/acme-challenge {
+                root /var/www/html;
+        }
+
+        # Forward all other paths to the HTTPS upstreams on this server
+        location / {
+                return 301 https://$host$request_uri;
+        }
+}
