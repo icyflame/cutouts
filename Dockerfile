@@ -12,4 +12,6 @@ COPY . /src
 WORKDIR /src
 RUN bundle install
 
+RUN /src/run-tests.sh
+
 ENTRYPOINT [ "/src/start-server.sh" ]
