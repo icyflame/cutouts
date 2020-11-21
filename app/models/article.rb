@@ -2,10 +2,11 @@ class Article < ActiveRecord::Base
   belongs_to :user
   validates :link, :quote, presence: true
   validates :link, format: { with: URI::regexp, message: "field must be a valid URL: Include http or https in the URL." }
+  validates :link, length: { maximum: 255 }
   default_scope { order(created_at: :desc) }
   enum visibility: [ :open, :unlisted, :closed ]
 
-  # This function has become long and complicated because of 
+  # This function has become long and complicated because of
   # a complex migration from the ActiveRecord serialized version of
   # arrays (stored as YAML) back to a normal comma-separated string
   def tags_array
@@ -16,7 +17,7 @@ class Article < ActiveRecord::Base
   def self.terms_query input
     "LOWER(quote) like LOWER('%#{input}%')
                  or LOWER(author) like LOWER('%#{input}%')
-                 or LOWER(link) like LOWER('%#{input}%') 
+                 or LOWER(link) like LOWER('%#{input}%')
                  or LOWER(tags) like LOWER('%#{input}')"
   end
 

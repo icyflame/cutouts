@@ -34,6 +34,24 @@ class ArticleTest < ActiveSupport::TestCase
     assert_not a.save
   end
 
+  test "should not save article with link of length 256 chars" do
+    a = Article.new
+    link = "https://" + (1...249).map { |i| "a" }.join
+    a.link = link
+    a.author = "Amy Dunne"
+    a.quote = "We are so cute, I wanna punch us in the face"
+    assert_not a.save
+  end
+
+  test "should save article with link of length 255 chars" do
+    a = Article.new
+    link = "https://" + (1...248).map { |i| "a" }.join
+    a.link = link
+    a.author = "Amy Dunne"
+    a.quote = "We are so cute, I wanna punch us in the face"
+    assert a.save
+  end
+
   test "should save article with valid, link, quote, author, tags as a public article" do
     a = Article.new
     a.link = "http://example.com"
