@@ -18,13 +18,18 @@ jobs:
           name: Ensure docker exists
           command: docker version
       - run:
-          name: Build image
+          name: Login to DockerHub
           command: |
-            IMAGE_NAME=cutouts
-            IMAGE_TAG=latest
+            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+      - run:
+          name: Build and push image to DockerHub
+          command: |
+            IMAGE_NAME=icyflame2/cutouts
+            IMAGE_TAG=$CIRCLE_BRANCH-$CIRCLE_SHA1
             IMAGE=$IMAGE_NAME:$IMAGE_TAG
+
             docker build -t $IMAGE .
-            docker image inspect $IMAGE
+            docker push $IMAGE
 
 workflows:
   version: 2
