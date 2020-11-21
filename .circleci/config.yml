@@ -1,0 +1,38 @@
+version: 2.1
+orbs:
+  shallow-checkout: datacamp/shallow-checkout@0.0.2
+# TODO: Add the shallow checkout orb
+# orbs:
+#   ruby: circleci/ruby@0.1.2
+
+jobs:
+  build:
+    machine:
+      image: ubuntu-2004:202010-01
+    steps:
+      - checkout
+      - run:
+          name: Where are we?
+          command: pwd
+      - run:
+          name: Ensure docker exists
+          command: docker version
+      - run:
+          name: Login to DockerHub
+          command: |
+            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+      - run:
+          name: Build and push image to DockerHub
+          command: |
+            IMAGE_NAME=icyflame2/cutouts
+            IMAGE_TAG=$CIRCLE_BRANCH-$CIRCLE_SHA1
+            IMAGE=$IMAGE_NAME:$IMAGE_TAG
+
+            docker build -t $IMAGE .
+            docker push $IMAGE
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
